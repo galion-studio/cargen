@@ -3,6 +3,7 @@
 //! `forge-p1a`: P1a square-tube crush pipeline.
 //!
 //!   forge-p1a deck    --variant baseline --h 5 --out DIR
+//!   variants: baseline pp friction us1 us3 us4 us5 us6 al_qs al_dyn us2_dyn
 //!   forge-p1a run     --variant baseline --h 5 --runs DIR --solver OPENCOURANT_ROOT [--threads 4] [--exp CSV]
 //!   forge-p1a report  --dir RUN_DIR [--exp CSV]            (re-evaluate an existing run)
 //!   forge-p1a summary --dirs D1,D2,... --out DIR           (combined JSON + Markdown)
@@ -11,12 +12,11 @@
 use anyhow::{bail, Context, Result};
 use forge_crash::compute::{Compute, CpuOpenCourant, RunRecord, SolverJob};
 use forge_crash::report::{self, CaseReport, MeshInfo, Tolerances};
-use forge_crash::{deck, experiment, mesh, params, th};
+use forge_crash::{cases, deck, experiment, mesh, params, th};
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 
 const RUN: &str = "TUBE";
-const DEFAULT_EXP: &str = "data/p1a/park2022_us2_fig3_digitized.csv";
 
 fn args() -> (String, HashMap<String, String>) {
     let mut it = std::env::args().skip(1);
@@ -36,33 +36,24 @@ fn args() -> (String, HashMap<String, String>) {
     (cmd, m)
 }
 
-fn case_from(a: &HashMap<String, String>) -> Result<params::TubeCrush> {
-    if let Some(cfg) = a.get("config") {
-        let c: params::TubeCrush = serde_json::from_str(&std::fs::read_to_string(cfg)?)?;
-        c.validate()?;
-        return Ok(c);
-    }
+fn case_from(a: &HashMap<String, String>) -> Result<cases::Case> {
     let h: f64 = a.get("h").map(|s| s.parse()).transpose()?.unwrap_or(5.0);
     let variant = a.get("variant").map(String::as_str).unwrap_or("baseline");
-    let mut c = params::p1a_us2_baseline(h);
-    match variant {
-        "baseline" => {}
-        "pp" => c.material = params::a500_us2_perfectly_plastic(),
-        "friction" => c.top_boundary = params::TopBoundary::FrictionWall,
-        v => bail!("unknown variant {v} (baseline | pp | friction)"),
-    }
-    if let Some(v) = a.get("speed") {
-        c.platen_speed_mm_s = v.parse()?;
+    let mut c = cases::by_name(variant, h).with_context(|| format!("unknown variant {variant}; known: {:?}", cases::NAMES))?;
+    if let Some(cfg) = a.get("config") {
+        c.params = serde_json::from_str(&std::fs::read_to_string(cfg)?)?;
     }
     if let Some(t) = a.get("threads") {
-        c.threads = t.parse()?;
+        c.params.threads = t.parse()?;
     }
-    c.case_id = format!("p1a_us2_{variant}_h{h}");
-    c.validate()?;
+    c.params.validate()?;
     Ok(c)
 }
 
-fn write_deck(c: &params::TubeCrush, dir: &Path) -> Result<MeshInfo> {
+fn write_deck(case: &cases::Case, dir: &Path) -> Result<MeshInfo> {
+    let c = &case.params;
+    std::fs::create_dir_all(dir)?;
+    std::fs::write(dir.join("reference.json"), serde_json::to_string_pretty(&case.reference)?)?;
     std::fs::create_dir_all(dir)?;
     let m = mesh::build(c);
     let d = deck::build(c, &m, RUN);
@@ -74,14 +65,15 @@ fn write_deck(c: &params::TubeCrush, dir: &Path) -> Result<MeshInfo> {
     Ok(info)
 }
 
-fn evaluate(dir: &Path, exp_csv: &str) -> Result<CaseReport> {
+fn evaluate(dir: &Path, exp_override: Option<&str>) -> Result<CaseReport> {
     let case: params::TubeCrush = serde_json::from_str(&std::fs::read_to_string(dir.join("case.json"))?)?;
     let mesh: MeshInfo = serde_json::from_str(&std::fs::read_to_string(dir.join("mesh.json"))?)?;
     let run: RunRecord = serde_json::from_str(&std::fs::read_to_string(dir.join("run.json"))?)?;
     let hist = th::parse_csv(&dir.join(format!("{RUN}T01.csv")))?;
-    let reference = experiment::park2022_us2(exp_csv);
-    let exp = experiment::read_curve(Path::new(exp_csv))?;
-    let r = report::build_case_report(case, mesh, run, &hist, &reference, &exp, &Tolerances::default());
+    let reference: experiment::Reference = serde_json::from_str(&std::fs::read_to_string(dir.join("reference.json"))?)?;
+    let csv = exp_override.map(String::from).or(reference.digitized_csv.clone());
+    let exp = csv.map(|p| experiment::read_curve(Path::new(&p))).transpose()?;
+    let r = report::build_case_report(case, mesh, run, &hist, &reference, exp.as_ref(), &Tolerances::default());
     std::fs::write(dir.join("report.json"), serde_json::to_string_pretty(&r)?)?;
     std::fs::write(dir.join("report.md"), report::case_markdown(&r))?;
     // simulated curve for plotting
@@ -96,9 +88,9 @@ fn evaluate(dir: &Path, exp_csv: &str) -> Result<CaseReport> {
 
 fn main() -> Result<()> {
     let (cmd, a) = args();
-    let exp = a.get("exp").cloned().unwrap_or_else(|| DEFAULT_EXP.to_string());
+    let exp = a.get("exp").map(String::as_str);
     match cmd.as_str() {
-        "config" => println!("{}", serde_json::to_string_pretty(&case_from(&a)?)?),
+        "config" => println!("{}", serde_json::to_string_pretty(&case_from(&a)?.params)?),
         "deck" => {
             let c = case_from(&a)?;
             let out = PathBuf::from(a.get("out").context("--out required")?);
@@ -106,21 +98,22 @@ fn main() -> Result<()> {
             println!("wrote deck to {} ({} shells)", out.display(), info.elements);
         }
         "run" => {
-            let c = case_from(&a)?;
+            let case = case_from(&a)?;
+            let c = &case.params;
             let runs = PathBuf::from(a.get("runs").map(String::as_str).unwrap_or("runs"));
             let dir = runs.join(&c.case_id);
             let solver = a.get("solver").cloned().or_else(|| std::env::var("OPENCOURANT_PATH").ok()).context("--solver or OPENCOURANT_PATH required")?;
-            let info = write_deck(&c, &dir)?;
+            let info = write_deck(&case, &dir)?;
             eprintln!("[forge-p1a] {}: {} shells, running solver ...", c.case_id, info.elements);
             let backend = CpuOpenCourant::new(solver);
             let rec = backend.run(&SolverJob { dir: dir.clone(), run_name: RUN.into(), threads: c.threads })?;
             std::fs::write(dir.join("run.json"), serde_json::to_string_pretty(&rec)?)?;
-            let r = evaluate(&dir, &exp)?;
+            let r = evaluate(&dir, exp)?;
             println!("{}", report::case_markdown(&r));
         }
         "report" => {
             let dir = PathBuf::from(a.get("dir").context("--dir required")?);
-            println!("{}", report::case_markdown(&evaluate(&dir, &exp)?));
+            println!("{}", report::case_markdown(&evaluate(&dir, exp)?));
         }
         "summary" => {
             let out = PathBuf::from(a.get("out").context("--out required")?);

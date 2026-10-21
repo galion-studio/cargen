@@ -1,0 +1,279 @@
+# SPDX-License-Identifier: MIT (this compilation). Values are facts read from the cited publications; full citations, licences and caveats in research/alloys-mg-ti.md (source_id = key in its Sources list).
+# One row per (alloy, property, value). Units: wt% (chemistry), MPa, GPa, %, kg/m^3, W/m.K, J/kg.K, degC, s^-1. Ranges written lo..hi; spec limits written max:x / min:x; "balance" = remainder; unit with "?" = unit ambiguous in source.
+# JC = Johnson-Cook sigma=(A+B*eps^n)(1+C*ln(rate/rate0))(1-T*^m); always use with the rate0/T_ref/T_melt rows of the same source+condition. CS = Cowper-Symonds sigma_d=sigma_y*(1+(rate/D)^(1/P)).
+# confidence: high = measured, primary, open full text read; medium = primary but narrow conditions or secondary/handbook; low = fit outside crash regime, ambiguous units, or non-standard model. Nothing here is MMPDS/MatWeb/NIMS/Granta/Thermo-Calc/NIST SRD derived.
+alloy,condition,property,value,unit,source_id,confidence,notes
+AZ31B,spec (via S_MUR2023 ref 24),Al,2.50..3.50,wt%,S_MUR2023,medium,nominal spec ranges quoted by the paper; not a measured heat
+AZ31B,spec (via S_MUR2023 ref 24),Zn,0.60..1.40,wt%,S_MUR2023,medium,nominal spec ranges quoted by the paper; not a measured heat
+AZ31B,spec (via S_MUR2023 ref 24),Mn,max:0.20,wt%,S_MUR2023,medium,nominal spec ranges quoted by the paper; not a measured heat
+AZ31B,spec (via S_MUR2023 ref 24),Si,max:0.10,wt%,S_MUR2023,medium,nominal spec ranges quoted by the paper; not a measured heat
+AZ31B,spec (via S_MUR2023 ref 24),Cu,max:0.050,wt%,S_MUR2023,medium,nominal spec ranges quoted by the paper; not a measured heat
+AZ31B,spec (via S_MUR2023 ref 24),Ca,max:0.040,wt%,S_MUR2023,medium,nominal spec ranges quoted by the paper; not a measured heat
+AZ31B,spec (via S_MUR2023 ref 24),Fe,max:0.005,wt%,S_MUR2023,medium,nominal spec ranges quoted by the paper; not a measured heat
+AZ31B,spec (via S_MUR2023 ref 24),Ni,max:0.005,wt%,S_MUR2023,medium,nominal spec ranges quoted by the paper; not a measured heat
+AZ31B,spec (via S_MUR2023 ref 24),Mg,balance,wt%,S_MUR2023,medium,nominal spec ranges quoted by the paper; not a measured heat
+AZ31B,sheet tension 0deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_A,186.163,MPa,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 0deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_B,536.359,MPa,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 0deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_n,0.719,-,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 0deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_C,0.0049,-,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 0deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_m,0.643,-,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 45deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_A,187.871,MPa,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 45deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_B,541.828,MPa,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 45deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_n,0.707,-,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 45deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_C,0.0022,-,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 45deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_m,0.613,-,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 90deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_A,211.682,MPa,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 90deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_B,799.457,MPa,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 90deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_n,1.005,-,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 90deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_C,0.0032,-,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,sheet tension 90deg to RD; 50-250 C; 0.005-0.0167 s^-1,JC_m,0.607,-,S_MUR2023,low,warm-forming fit (AARE 13.5% at 0deg); Eq.7 in text uses m=0.662 vs Table 1 0.643; not crash-rate
+AZ31B,JC reference values,JC_rate0,0.005,s^-1,S_MUR2023,medium,
+AZ31B,JC reference values,JC_T_ref,50,degC,S_MUR2023,medium,
+AZ31B,JC reference values,JC_T_melt,630,degC,S_MUR2023,medium,
+AZ91 (HPDC),"measured ICP-AES, CSIRO die-cast",Al,8.88,wt%,S_ANG2021,high,
+AZ91 (HPDC),"measured ICP-AES, CSIRO die-cast",Mn,0.19,wt%,S_ANG2021,high,
+AZ91 (HPDC),"measured ICP-AES, CSIRO die-cast",Zn,0.74,wt%,S_ANG2021,high,
+AZ91 (HPDC),"measured ICP-AES, CSIRO die-cast",Mg,balance,wt%,S_ANG2021,high,
+AM60 (HPDC),"measured ICP-AES, CSIRO die-cast",Al,6.26,wt%,S_ANG2021,high,
+AM60 (HPDC),"measured ICP-AES, CSIRO die-cast",Mn,0.29,wt%,S_ANG2021,high,
+AM60 (HPDC),"measured ICP-AES, CSIRO die-cast",Zn,0.1,wt%,S_ANG2021,high,
+AM60 (HPDC),"measured ICP-AES, CSIRO die-cast",Mg,balance,wt%,S_ANG2021,high,
+AM40 (HPDC),"measured ICP-AES, CSIRO die-cast",Al,4.44,wt%,S_ANG2021,high,
+AM40 (HPDC),"measured ICP-AES, CSIRO die-cast",Mn,0.21,wt%,S_ANG2021,high,
+AM40 (HPDC),"measured ICP-AES, CSIRO die-cast",Zn,0.05,wt%,S_ANG2021,high,
+AM40 (HPDC),"measured ICP-AES, CSIRO die-cast",Mg,balance,wt%,S_ANG2021,high,
+AE44 (HPDC),"measured ICP-AES, CSIRO die-cast",Al,3.67,wt%,S_ANG2021,high,
+AE44 (HPDC),"measured ICP-AES, CSIRO die-cast",Mn,0.31,wt%,S_ANG2021,high,
+AE44 (HPDC),"measured ICP-AES, CSIRO die-cast",RE,3.83,wt%,S_ANG2021,high,
+AE44 (HPDC),"measured ICP-AES, CSIRO die-cast",Mg,balance,wt%,S_ANG2021,high,
+AZ91 (HPDC),RT tension ~1e-3 s^-1,YS_0.2,163.0,MPa,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AZ91 (HPDC),RT tension ~1e-3 s^-1,YS_higher_offset,185.5,MPa,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AZ91 (HPDC),RT tension ~1e-3 s^-1,UTS,274.6,MPa,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AZ91 (HPDC),RT tension ~1e-3 s^-1,elongation,6.6,%,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AM60 (HPDC),RT tension ~1e-3 s^-1,YS_0.2,126.0,MPa,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AM60 (HPDC),RT tension ~1e-3 s^-1,YS_higher_offset,148.0,MPa,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AM60 (HPDC),RT tension ~1e-3 s^-1,UTS,291.5,MPa,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AM60 (HPDC),RT tension ~1e-3 s^-1,elongation,13.7,%,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AM40 (HPDC),RT tension ~1e-3 s^-1,YS_0.2,111.8,MPa,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AM40 (HPDC),RT tension ~1e-3 s^-1,YS_higher_offset,132.5,MPa,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AM40 (HPDC),RT tension ~1e-3 s^-1,UTS,287.0,MPa,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AM40 (HPDC),RT tension ~1e-3 s^-1,elongation,17.8,%,S_ANG2021,high,values at 50/100/150 C also in source Table 2 (not transcribed)
+AZ91 (HPDC),"RT, initial loading modulus",E,45,GPa,S_ANG2021,medium,approx. value stated in text (anelastic study; ~43 GPa AZ91 at 150 C)
+AM60 (HPDC),"RT, initial loading modulus",E,45,GPa,S_ANG2021,medium,approx. value stated in text (anelastic study; ~43 GPa AZ91 at 150 C)
+AM40 (HPDC),"RT, initial loading modulus",E,45,GPa,S_ANG2021,medium,approx. value stated in text (anelastic study; ~43 GPa AZ91 at 150 C)
+AE44 (HPDC),"RT, initial loading modulus",E,45,GPa,S_ANG2021,medium,approx. value stated in text (anelastic study; ~43 GPa AZ91 at 150 C)
+AM50A,nominal,Al,5.0,wt%,S_OSTI1097772,medium,
+AM50A,nominal,Mn,min:0.13,wt%,S_OSTI1097772,medium,
+AM60A,nominal,Al,6.0,wt%,S_OSTI1097772,medium,
+AM60A,nominal,Mn,min:0.13,wt%,S_OSTI1097772,medium,
+AZ91D,nominal,Al,9.0,wt%,S_OSTI1097772,medium,
+AZ91D,nominal,Mn,min:0.13,wt%,S_OSTI1097772,medium,
+AZ91D,nominal,Zn,0.7,wt%,S_OSTI1097772,medium,
+AM50A,handbook thermal data,T_liquidus,620,degC,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM50A,handbook thermal data,T_solidus,550,degC,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM50A,handbook thermal data,k,65,W/m.K,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM50A,handbook thermal data,cp,1020,J/kg.K,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM50A,handbook thermal data,latent_heat_fusion,368,kJ/kg,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM60A,handbook thermal data,T_liquidus,615,degC,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM60A,handbook thermal data,T_solidus,545,degC,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM60A,handbook thermal data,k,61,W/m.K,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM60A,handbook thermal data,cp,1000,J/kg.K,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM60A,handbook thermal data,latent_heat_fusion,370,kJ/kg,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AZ91D,handbook thermal data,T_liquidus,595,degC,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AZ91D,handbook thermal data,T_solidus,470,degC,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AZ91D,handbook thermal data,k,73,W/m.K,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AZ91D,handbook thermal data,cp,1050,J/kg.K,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AZ91D,handbook thermal data,latent_heat_fusion,373,kJ/kg,S_OSTI1097772,medium,report Table 3 cites ASM Specialty Handbook (secondary)
+AM50A,"as-cast F temper, industry-obtainable",UTS,228,MPa,S_OSTI1097772,medium,
+AM50A,"as-cast F temper, industry-obtainable",YS_0.2,124,MPa,S_OSTI1097772,medium,
+AM50A,"as-cast F temper, industry-obtainable",elongation,15,%,S_OSTI1097772,medium,
+AM50A,"as-cast F temper, industry-obtainable",hardness,60,HB,S_OSTI1097772,medium,
+AM50A,"as-cast F temper, industry-obtainable",poisson,0.35,-,S_OSTI1097772,medium,
+AM60A,"as-cast F temper, industry-obtainable",UTS,241,MPa,S_OSTI1097772,medium,
+AM60A,"as-cast F temper, industry-obtainable",YS_0.2,131,MPa,S_OSTI1097772,medium,
+AM60A,"as-cast F temper, industry-obtainable",elongation,13,%,S_OSTI1097772,medium,
+AM60A,"as-cast F temper, industry-obtainable",hardness,65,HB,S_OSTI1097772,medium,
+AM60A,"as-cast F temper, industry-obtainable",poisson,0.35,-,S_OSTI1097772,medium,
+AZ91D,"as-cast F temper, industry-obtainable",UTS,230,MPa,S_OSTI1097772,medium,
+AZ91D,"as-cast F temper, industry-obtainable",YS_0.2,150,MPa,S_OSTI1097772,medium,
+AZ91D,"as-cast F temper, industry-obtainable",elongation,3,%,S_OSTI1097772,medium,
+AZ91D,"as-cast F temper, industry-obtainable",hardness,63,HB,S_OSTI1097772,medium,
+AZ91D,"as-cast F temper, industry-obtainable",poisson,0.35,-,S_OSTI1097772,medium,
+AM60B,"die-cast sheet, quasi-static",YS_0.2,143,MPa,S_YANG2024,high,
+AM60B,"die-cast sheet, quasi-static",UTS,246,MPa,S_YANG2024,high,
+AM60B,JC fracture (no D4/D5),JC_D1,0.106,-,S_YANG2024,medium,
+AM60B,JC fracture (no D4/D5),JC_D2,6.767,-,S_YANG2024,medium,
+AM60B,JC fracture (no D4/D5),JC_D3,-17.842,-,S_YANG2024,medium,
+AM60B,Swift-weighted Hockett-Sherby hardening,SW_K,666.769,MPa,S_YANG2024,medium,"carried over from research/materials.md 3.7; CS C,P NOT published (rechecked full-text XML)"
+AM60B,Swift-weighted Hockett-Sherby hardening,SW_eps0,0.02929,-,S_YANG2024,medium,"carried over from research/materials.md 3.7; CS C,P NOT published (rechecked full-text XML)"
+AM60B,Swift-weighted Hockett-Sherby hardening,SW_n,0.444,-,S_YANG2024,medium,"carried over from research/materials.md 3.7; CS C,P NOT published (rechecked full-text XML)"
+AM60B,Swift-weighted Hockett-Sherby hardening,HS_sigma0,146.361,MPa,S_YANG2024,medium,"carried over from research/materials.md 3.7; CS C,P NOT published (rechecked full-text XML)"
+AM60B,Swift-weighted Hockett-Sherby hardening,HS_A,168.581,MPa,S_YANG2024,medium,"carried over from research/materials.md 3.7; CS C,P NOT published (rechecked full-text XML)"
+AM60B,Swift-weighted Hockett-Sherby hardening,HS_B,23.815,-,S_YANG2024,medium,"carried over from research/materials.md 3.7; CS C,P NOT published (rechecked full-text XML)"
+AM60B,Swift-weighted Hockett-Sherby hardening,HS_m,1.263,-,S_YANG2024,medium,"carried over from research/materials.md 3.7; CS C,P NOT published (rechecked full-text XML)"
+AM60B,Swift-weighted Hockett-Sherby hardening,weight_alpha,0.2,-,S_YANG2024,medium,"carried over from research/materials.md 3.7; CS C,P NOT published (rechecked full-text XML)"
+WE43,measured ingot ICP-MS,Y,3.6,wt%,S_DVO2021,high,
+WE43,measured ingot ICP-MS,Nd,2.2,wt%,S_DVO2021,high,
+WE43,measured ingot ICP-MS,Dy,0.3,wt%,S_DVO2021,high,
+WE43,measured ingot ICP-MS,Gd,0.3,wt%,S_DVO2021,high,
+WE43,measured ingot ICP-MS,Zr,0.4,wt%,S_DVO2021,high,
+WE43,measured ingot ICP-MS,Fe,16,ppm,S_DVO2021,high,
+WE43,measured ingot ICP-MS,Ni,5,ppm,S_DVO2021,high,
+WE43,measured ingot ICP-MS,Cu,23,ppm,S_DVO2021,high,
+WE43,measured ingot ICP-MS,Mg,balance,wt%,S_DVO2021,high,
+WE43,range over casting/T4/T6/extrusion/powder routes,TYS,140..280,MPa,S_DVO2021,medium,per-state values only in Fig. 6 (not digitised)
+WE43,range over casting/T4/T6/extrusion/powder routes,UTS,210..325,MPa,S_DVO2021,medium,per-state values only in Fig. 6 (not digitised)
+WE43,"ignition, range over routes",T_ignition,855..1082,degC,S_DVO2021,medium,
+ZK60,nominal,Zn,6,wt%,S_LIU2023,medium,
+ZK60,nominal,Zr,0.6,wt%,S_LIU2023,medium,
+ZK60,nominal,Mg,balance,wt%,S_LIU2023,medium,
+ZK60,"SHPB compression 1700 s^-1, grain 3um",yield,172,MPa,S_LIU2023,medium,
+ZK60,"SHPB compression 1700 s^-1, grain 3um",peak_stress,441,MPa,S_LIU2023,medium,
+ZK60,"SHPB compression 1700 s^-1, grain 25um",yield,67,MPa,S_LIU2023,medium,
+ZK60,"SHPB compression 1700 s^-1, grain 25um",peak_stress,322,MPa,S_LIU2023,medium,
+ZK60,"modified JC (cubic in strain), 3um, single rate",mJC_A,218.89,MPa,S_LIU2023,low,single-rate fit; not a standard JC; 15/25um sets in source
+ZK60,"modified JC (cubic in strain), 3um, single rate",mJC_B1,-149.42,MPa,S_LIU2023,low,single-rate fit; not a standard JC; 15/25um sets in source
+ZK60,"modified JC (cubic in strain), 3um, single rate",mJC_B2,48447.06,MPa,S_LIU2023,low,single-rate fit; not a standard JC; 15/25um sets in source
+ZK60,"modified JC (cubic in strain), 3um, single rate",mJC_B3,-267832.58,MPa,S_LIU2023,low,single-rate fit; not a standard JC; 15/25um sets in source
+ZK60,"modified JC (cubic in strain), 3um, single rate",mJC_C,7.34e-06,-,S_LIU2023,low,single-rate fit; not a standard JC; 15/25um sets in source
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_A,862,MPa,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_B,331,MPa,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_n,0.34,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_C,0.012,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_m,0.8,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_D1,-0.09,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_D2,0.25,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_D3,-0.5,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_D4,0.014,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,Johnson 1985 'original' via Lesuer,JC_D5,3.87,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_A,1098,MPa,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_B,1092,MPa,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_n,0.93,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_C,0.014,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_m,1.1,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_D1,-0.09,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_D2,0.25,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_D3,-0.5,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_D4,0.014,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,LLNL 1999 set,JC_D5,3.87,-,S_LES1999,medium,carried over from research/materials.md 3.1
+Ti-6Al-4V,physical (report Table 7),T_melt,1605,degC,S_LES1999,medium,
+Ti-6Al-4V,physical (report Table 7),density,4428,kg/m^3,S_LES1999,medium,
+Ti-6Al-4V,physical (report Table 7),cp,580,J/kg.K,S_LES1999,medium,
+Ti-6Al-4V,forged + 989 C/30 min air cool,density,4450,kg/m^3,S_QIAN2019,medium,
+Ti-6Al-4V,forged + 989 C/30 min air cool,E,112.5,GPa,S_QIAN2019,medium,
+Ti-6Al-4V,forged + 989 C/30 min air cool,YS,773.9,MPa,S_QIAN2019,medium,
+Ti-6Al-4V,forged + 989 C/30 min air cool,hardness,30.6,HRC,S_QIAN2019,medium,
+Ti-6Al-4V,forged + 989 C/30 min air cool,CTE,6.5,1e-6/K,S_QIAN2019,medium,
+Ti-6Al-4V,forged + 989 C/30 min air cool,k,3.85,W/m.K,S_QIAN2019,low,"looks low vs typical Ti-6Al-4V; unverified, do not use without check"
+Ti-6Al-4V,"SHPB compression 293-1073 K, 1000-7000 s^-1 (heat-treated)",JC_A,874,MPa,S_QIAN2019,low,rate0 not stated in paper; cutting-oriented
+Ti-6Al-4V,"SHPB compression 293-1073 K, 1000-7000 s^-1 (heat-treated)",JC_B,583,MPa,S_QIAN2019,low,rate0 not stated in paper; cutting-oriented
+Ti-6Al-4V,"SHPB compression 293-1073 K, 1000-7000 s^-1 (heat-treated)",JC_n,0.316,-,S_QIAN2019,low,rate0 not stated in paper; cutting-oriented
+Ti-6Al-4V,"SHPB compression 293-1073 K, 1000-7000 s^-1 (heat-treated)",JC_C,0.003,-,S_QIAN2019,low,rate0 not stated in paper; cutting-oriented
+Ti-6Al-4V,"SHPB compression 293-1073 K, 1000-7000 s^-1 (heat-treated)",JC_m,0.95,-,S_QIAN2019,low,rate0 not stated in paper; cutting-oriented
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G1 8e-3 s^-1",E,115,GPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G1 8e-3 s^-1",YS,330,MPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G1 8e-3 s^-1",JC_A,330,MPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G1 8e-3 s^-1",JC_B,753,MPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G1 8e-3 s^-1",JC_n,0.42,-,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G1 8e-3 s^-1",UTS_true,631,MPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G2 8e-2 s^-1",E,112,GPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G2 8e-2 s^-1",YS,322,MPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G2 8e-2 s^-1",JC_A,322,MPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G2 8e-2 s^-1",JC_B,707,MPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G2 8e-2 s^-1",JC_n,0.39,-,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G2 8e-2 s^-1",UTS_true,619,MPa,S_SIE2021,high,C~1e-13 (no rate effect in quasi-static range); m not identified
+CP-Ti Grade 2 (T40),"0.5 mm annealed sheet, RT, G1",true_uniform_strain,12.4,%,S_SIE2021,high,
+Ti-3Al-2.5V,measured tube chemistry,Al,3.05,wt%,S_LIU2018,high,"Al +/-0.05, V +/-0.06"
+Ti-3Al-2.5V,measured tube chemistry,V,2.69,wt%,S_LIU2018,high,"Al +/-0.05, V +/-0.06"
+Ti-3Al-2.5V,measured tube chemistry,Fe,0.1,wt%,S_LIU2018,high,"Al +/-0.05, V +/-0.06"
+Ti-3Al-2.5V,measured tube chemistry,O,0.1,wt%,S_LIU2018,high,"Al +/-0.05, V +/-0.06"
+Ti-3Al-2.5V,measured tube chemistry,C,0.012,wt%,S_LIU2018,high,"Al +/-0.05, V +/-0.06"
+Ti-3Al-2.5V,measured tube chemistry,N,0.01,wt%,S_LIU2018,high,"Al +/-0.05, V +/-0.06"
+Ti-3Al-2.5V,measured tube chemistry,H,0.001,wt%,S_LIU2018,high,"Al +/-0.05, V +/-0.06"
+Ti-3Al-2.5V,measured tube chemistry,Ti,balance,wt%,S_LIU2018,high,"Al +/-0.05, V +/-0.06"
+Ti-3Al-2.5V,"tube OD6xW0.5 mm, 1e-3 s^-1",UTS,960,MPa,S_LIU2018,high,
+Ti-3Al-2.5V,"tube OD6xW0.5 mm, 1e-3 s^-1",YS,820,MPa,S_LIU2018,high,
+Ti-3Al-2.5V,"tube OD6xW0.5 mm, 1e-3 s^-1",elongation,14,%,S_LIU2018,high,
+Ti-3Al-2.5V,"tube OD6xW0.5 mm, SHPB 3000 s^-1",avg_flow_stress,950,MPa,S_LIU2018,medium,
+Ti-3Al-2.5V,"tube OD8xW0.6 mm, 1e-3 s^-1",UTS,940,MPa,S_LIU2018,high,
+Ti-3Al-2.5V,"tube OD8xW0.6 mm, 1e-3 s^-1",YS,800,MPa,S_LIU2018,high,
+Ti-3Al-2.5V,"tube OD8xW0.6 mm, 1e-3 s^-1",elongation,15,%,S_LIU2018,high,
+Ti-3Al-2.5V,"tube OD8xW0.6 mm, SHPB 3000 s^-1",avg_flow_stress,890,MPa,S_LIU2018,medium,
+Ti-3Al-2.5V,"tube OD12xW0.9 mm, 1e-3 s^-1",UTS,925,MPa,S_LIU2018,high,
+Ti-3Al-2.5V,"tube OD12xW0.9 mm, 1e-3 s^-1",YS,780,MPa,S_LIU2018,high,
+Ti-3Al-2.5V,"tube OD12xW0.9 mm, 1e-3 s^-1",elongation,16,%,S_LIU2018,high,
+Ti-3Al-2.5V,"tube OD12xW0.9 mm, SHPB 3000 s^-1",avg_flow_stress,850,MPa,S_LIU2018,medium,
+Ti-10V-2Fe-3Al,JC simultaneous fit (cutting),JC_A,1012.5,MPa,S_STO2019,low,machining-oriented inverse fit; source Table 1 properties are MatWeb-derived and EXCLUDED
+Ti-10V-2Fe-3Al,JC simultaneous fit (cutting),JC_B,875.4,MPa,S_STO2019,low,machining-oriented inverse fit; source Table 1 properties are MatWeb-derived and EXCLUDED
+Ti-10V-2Fe-3Al,JC simultaneous fit (cutting),JC_n,0.2613,-,S_STO2019,low,machining-oriented inverse fit; source Table 1 properties are MatWeb-derived and EXCLUDED
+Ti-10V-2Fe-3Al,JC simultaneous fit (cutting),JC_C,0.0215,-,S_STO2019,low,machining-oriented inverse fit; source Table 1 properties are MatWeb-derived and EXCLUDED
+Ti-10V-2Fe-3Al,JC simultaneous fit (cutting),JC_m,1.07,-,S_STO2019,low,machining-oriented inverse fit; source Table 1 properties are MatWeb-derived and EXCLUDED
+Ti-10V-2Fe-3Al,JC separate fit (cutting),JC_A,976.9,MPa,S_STO2019,low,
+Ti-10V-2Fe-3Al,JC separate fit (cutting),JC_B,502.3,MPa,S_STO2019,low,
+Ti-10V-2Fe-3Al,JC separate fit (cutting),JC_n,0.22,-,S_STO2019,low,
+Ti-10V-2Fe-3Al,JC separate fit (cutting),JC_C,0.028,-,S_STO2019,low,
+Ti-10V-2Fe-3Al,JC separate fit (cutting),JC_m,0.8,-,S_STO2019,low,
+TRIP780 spot-weld nugget material,modified JC (paper's own form),mJC_A,1526.5,MPa,S_LI2020,low,"weld material, NOT base TRIP780 sheet"
+TRIP780 spot-weld nugget material,modified JC (paper's own form),mJC_e0,0.00519,-,S_LI2020,low,"weld material, NOT base TRIP780 sheet"
+TRIP780 spot-weld nugget material,modified JC (paper's own form),mJC_n,0.242,-,S_LI2020,low,"weld material, NOT base TRIP780 sheet"
+TRIP780 spot-weld nugget material,modified JC (paper's own form),mJC_C,0.00557,-,S_LI2020,low,"weld material, NOT base TRIP780 sheet"
+TRIP780 spot-weld nugget material,modified JC (paper's own form),mJC_rate0,0.00321,s^-1,S_LI2020,low,"weld material, NOT base TRIP780 sheet"
+TRIP780 spot-weld nugget material,modified JC (paper's own form),mJC_m,1.025,-,S_LI2020,low,"weld material, NOT base TRIP780 sheet"
+TRIP780 spot-weld nugget material,physical inputs used,E,185,GPa,S_LI2020,medium,
+TRIP780 spot-weld nugget material,physical inputs used,poisson,0.33,-,S_LI2020,medium,
+TRIP780 spot-weld nugget material,physical inputs used,density,7850,kg/m^3,S_LI2020,medium,
+TRIP780 spot-weld nugget material,physical inputs used,cp,420,J/kg.K,S_LI2020,medium,
+TRIP780 spot-weld nugget material,physical inputs used,T_melt,1806.7,K,S_LI2020,medium,
+TRIP780 spot-weld nugget material,physical inputs used,T_ref,293,K,S_LI2020,medium,
+AA5182-O,"1 mm sheet, electromagnetic forming inverse ID",JC_A,166,MPa,S_LIU2022,medium,
+AA5182-O,"1 mm sheet, electromagnetic forming inverse ID",JC_B,681,MPa,S_LIU2022,medium,
+AA5182-O,"1 mm sheet, electromagnetic forming inverse ID",JC_n,0.64,-,S_LIU2022,medium,
+AA5182-O,"rate terms, EM hole-flanging inverse ID",JC_C,0.00296,-,S_LIU2022,low,reference rate not stated in text
+AA5182-O,"rate terms, EM hole-flanging inverse ID",HuhKang_C2,-0.028,-,S_LIU2022,low,reference rate not stated in text
+AA5182-O,"rate terms, EM hole-flanging inverse ID",HuhKang_C3,0.00228,-,S_LIU2022,low,reference rate not stated in text
+AA5182-O,"rate terms, EM hole-flanging inverse ID",ARJ_C4,0.0029,-,S_LIU2022,low,reference rate not stated in text
+AA5182-O,"rate terms, EM hole-flanging inverse ID",CS_D,14945,s^-1,S_LIU2022,low,reference rate not stated in text
+AA5182-O,"rate terms, EM hole-flanging inverse ID",CS_P,0.865,-,S_LIU2022,low,reference rate not stated in text
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",density,1520,kg/m^3,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",E1,127,GPa,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",E2,8.41,GPa,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",G12,4.21,GPa,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",nu12,0.309,-,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",nu21,0.02049,-,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",XT,2200,MPa,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",YT,48.9,MPa,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",XC,1470,MPa,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",YC,199,MPa,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP T700GC-12K/2510 UD tape,"lamina, RT (AGATE allowables via MAT54 paper)",SC,154,MPa,S_FER2011,medium,"paywalled paper, numbers only; primary = AGATE report (Tomblin et al.)"
+CFRP Sika CarboDur S812 (pultruded),MAT103 input,density,1600,kg/m^3,S_SPI2026,medium,
+CFRP Sika CarboDur S812 (pultruded),MAT103 input,E,165,GPa,S_SPI2026,medium,
+CFRP Sika CarboDur S812 (pultruded),MAT103 input,strength_limit,3000,MPa,S_SPI2026,medium,
+CFRP Sika CarboDur S812 (pultruded),MAT103 input,poisson,0.26,-,S_SPI2026,medium,
+CFRP Sika CarboDur S812 (pultruded),MAT103 input,failure_strain,0.05,-,S_SPI2026,medium,
+Stainless 1.4003 sheet,MAT105 Krupkowski,E,187,GPa,S_SPI2026,medium,
+Stainless 1.4003 sheet,MAT105 Krupkowski,poisson,0.28,-,S_SPI2026,medium,
+Stainless 1.4003 sheet,MAT105 Krupkowski,Krupkowski_k,754.37,MPa,S_SPI2026,medium,
+Stainless 1.4003 sheet,MAT105 Krupkowski,Krupkowski_eps0,0.0575,-,S_SPI2026,medium,
+Stainless 1.4003 sheet,MAT105 Krupkowski,Krupkowski_n,0.194,-,S_SPI2026,medium,
+Adhesive SikaPower 1277 (epoxy),"ENF/DCB-derived, steel-CFRP joints",density,1190,kg/m^3,S_SPI2026,medium,analytic from tests
+Adhesive SikaPower 1277 (epoxy),"ENF/DCB-derived, steel-CFRP joints",G_II,1979..2816,J/m^2,S_SPI2026,medium,analytic from tests
+Adhesive SikaPower 1277 (epoxy),"ENF/DCB-derived, steel-CFRP joints",shear_modulus_eff,590..770,MPa,S_SPI2026,medium,analytic from tests
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,En,1.6,GPa,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,Es,0.37,GPa,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,SIGSn,0.0311,GPa?,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,SIGDn_10000/s,0.08083,GPa?,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,SIGSs,0.0231,GPa?,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,SIGDs,0.04933,GPa?,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,EFRSn,0.0039,kN/mm?,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,EFRDn,0.0072,kN/mm?,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,EFRSs,0.0231,kN/mm?,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,EFRDs,0.02394,kN/mm?,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,ETA,6.79,-,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+Adhesive SikaPower 1277 (epoxy),PAM-CRASH MAT305 calibrated,PSLOPE,0.0231,-,S_SPI2026,low,"published unit column inconsistent; units assumed PAM kg-mm-ms set (GPa, kN/mm); verify before use"
+LGF/PP 30 wt% (LECT),"injection-moulded, measured tension",E,6225,MPa,S_DU2022,high,
+LGF/PP 30 wt% (LECT),"injection-moulded, measured tension",UTS,92.4,MPa,S_DU2022,high,
+LGF/PP constituents,model inputs (unsourced in paper),PP_density,910,kg/m^3,S_DU2022,low,
+LGF/PP constituents,model inputs (unsourced in paper),PP_E,2070,MPa,S_DU2022,low,
+LGF/PP constituents,model inputs (unsourced in paper),PP_poisson,0.42,-,S_DU2022,low,
+LGF/PP constituents,model inputs (unsourced in paper),Eglass_E,90,GPa,S_DU2022,low,
+LGF/PP constituents,model inputs (unsourced in paper),Eglass_density,2520,kg/m^3,S_DU2022,low,

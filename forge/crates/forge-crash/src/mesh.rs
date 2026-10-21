@@ -32,6 +32,9 @@ pub fn imperfection(face: usize, u: f64, z: f64, length: f64, half_waves: u32, w
 }
 
 pub fn build(p: &TubeCrush) -> Mesh {
+    if p.section == crate::params::Section::Circular {
+        return build_circular(p);
+    }
     let a = p.midline_width();
     let c = 0.5 * a;
     let per_side = ((a / p.element_size_mm).round() as usize).max(2);
@@ -74,5 +77,41 @@ pub fn build(p: &TubeCrush) -> Mesh {
         per_side,
         n_axial,
         actual_size_mm: (a / per_side as f64, p.length_mm / n_axial as f64),
+    }
+}
+
+/// Circular tube: `ring` nodes around, imperfection w = w0 cos(k theta) sin(m pi z / L).
+pub fn build_circular(p: &TubeCrush) -> Mesh {
+    let r = 0.5 * p.midline_width();
+    let ring = ((p.midline_perimeter() / p.element_size_mm).round() as usize).max(8);
+    let n_axial = ((p.length_mm / p.element_size_mm).round() as usize).max(2);
+    let w0 = p.imperfection_w0();
+    let id = |k: usize, i: usize| FIRST_NODE_ID + (k * ring + i) as u32;
+    let mut nodes = Vec::with_capacity(ring * (n_axial + 1));
+    for k in 0..=n_axial {
+        let z = p.length_mm * k as f64 / n_axial as f64;
+        for i in 0..ring {
+            let th = 2.0 * PI * i as f64 / ring as f64;
+            let w = w0 * (p.circ_waves as f64 * th).cos() * (p.imperfection_half_waves as f64 * PI * z / p.length_mm).sin();
+            nodes.push((id(k, i), [(r + w) * th.cos(), (r + w) * th.sin(), z]));
+        }
+    }
+    let mut quads = Vec::with_capacity(ring * n_axial);
+    let mut eid = FIRST_ELEM_ID;
+    for k in 0..n_axial {
+        for i in 0..ring {
+            let i2 = (i + 1) % ring;
+            quads.push((eid, [id(k, i), id(k, i2), id(k + 1, i2), id(k + 1, i)]));
+            eid += 1;
+        }
+    }
+    Mesh {
+        bottom_nodes: (0..ring).map(|i| id(0, i)).collect(),
+        top_nodes: (0..ring).map(|i| id(n_axial, i)).collect(),
+        nodes,
+        quads,
+        per_side: ring / 4,
+        n_axial,
+        actual_size_mm: (p.midline_perimeter() / ring as f64, p.length_mm / n_axial as f64),
     }
 }

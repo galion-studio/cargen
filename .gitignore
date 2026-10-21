@@ -152,3 +152,8 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+# local font caches
+**/.fontcache/
+# ODbL thermodynamic DBs: fetched by script, not shipped (pending decision)
+*.tdb

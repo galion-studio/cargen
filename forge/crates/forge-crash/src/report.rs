@@ -55,6 +55,9 @@ pub struct CurveMetrics {
     pub fold_count: usize,
     pub fold_peaks_mm: Vec<f64>,
     pub mean_fold_pitch_mm: Option<f64>,
+    /// Largest platen travel reached (mm); for drop tests this is the final crush.
+    #[serde(default)]
+    pub max_travel_mm: f64,
 }
 
 pub fn curve_metrics(c: &Curve, crush_mm: f64, mean_for_prominence: f64, peak_smooth_mm: f64) -> CurveMetrics {
@@ -70,6 +73,7 @@ pub fn curve_metrics(c: &Curve, crush_mm: f64, mean_for_prominence: f64, peak_sm
         fold_count: xs.len(),
         fold_peaks_mm: xs,
         mean_fold_pitch_mm: pitch,
+        max_travel_mm: *c.disp_mm.last().unwrap_or(&0.0),
     }
 }
 
@@ -110,9 +114,9 @@ pub fn quality(th: &TimeHistory, sim: &Curve, crush_mm: f64) -> Quality {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Row {
     pub quantity: String,
-    pub measured: f64,
+    pub measured: Option<f64>,
     pub simulated: f64,
-    pub error_pct: f64,
+    pub error_pct: Option<f64>,
     pub tolerance: String,
     pub pass: bool,
     pub measured_source: String,
@@ -124,9 +128,10 @@ pub struct CaseReport {
     pub mesh: MeshInfo,
     pub run: RunRecord,
     pub simulated: CurveMetrics,
-    pub experiment_digitized: CurveMetrics,
+    pub reference: Reference,
+    pub experiment_digitized: Option<CurveMetrics>,
     pub quality: Quality,
-    pub iso18571: IsoScore,
+    pub iso18571: Option<IsoScore>,
     pub rows: Vec<Row>,
     pub note: String,
 }
@@ -141,6 +146,7 @@ pub struct MeshInfo {
 }
 
 pub fn pct(sim: f64, meas: f64) -> f64 {
+    if meas.is_nan() { return f64::NAN; }
     100.0 * (sim - meas) / meas
 }
 
@@ -166,44 +172,69 @@ pub fn build_case_report(
     run: RunRecord,
     th: &TimeHistory,
     reference: &Reference,
-    exp: &Curve,
+    exp: Option<&Curve>,
     tol: &Tolerances,
 ) -> CaseReport {
     let d = reference.crush_length_mm;
     let sim = sim_curve(th, d);
-    let expg = Curve::resample(&exp.disp_mm, &exp.force_kn, GRID_MM, d);
-    let sm = curve_metrics(&sim, d, reference.mean_kn, PEAK_SMOOTH_MM);
-    let em = curve_metrics(&expg, d, reference.mean_kn, 0.0);
+    let mut sm = curve_metrics(&sim, d, reference.mean_kn, PEAK_SMOOTH_MM);
+    sm.max_travel_mm = th.disp_mm.iter().fold(0.0_f64, |m, v| m.max(*v));
+    // drop tests: if the striker stopped before the window end, the mean is over its own travel
+    let d_sim = d.min(sm.max_travel_mm);
+    if d_sim < d - 0.5 {
+        sm.mean_kn = sim.mean_force_kn(d_sim);
+    }
     let q = quality(th, &sim, d);
-    let n = sim.force_kn.len().min(expg.force_kn.len());
-    let iso = iso18571::score(&expg.force_kn[..n], &sim.force_kn[..n], GRID_MM, &Default::default());
+    let (em, iso) = match exp {
+        Some(exp) => {
+            let expg = Curve::resample(&exp.disp_mm, &exp.force_kn, GRID_MM, d);
+            let n = sim.force_kn.len().min(expg.force_kn.len());
+            (Some(curve_metrics(&expg, d, reference.mean_kn, 0.0)), Some(iso18571::score(&expg.force_kn[..n], &sim.force_kn[..n], GRID_MM, &Default::default())))
+        }
+        None => (None, None),
+    };
     let mut rows = Vec::new();
     let mut row = |q: &str, m: f64, s: f64, tol_s: String, pass: bool, src: &str| {
-        rows.push(Row { quantity: q.into(), measured: m, simulated: s, error_pct: pct(s, m), tolerance: tol_s, pass, measured_source: src.into() })
+        rows.push(Row { quantity: q.into(), measured: if m.is_nan() { None } else { Some(m) }, simulated: s, error_pct: if m.is_nan() { None } else { Some(pct(s, m)) }, tolerance: tol_s, pass, measured_source: src.into() })
     };
-    let e = pct(sm.peak_kn, reference.peak_kn);
-    row("Peak force P_u (kN)", reference.peak_kn, sm.peak_kn, format!("±{}%", tol.peak_force_pct), e.abs() <= tol.peak_force_pct, "Park et al. 2022 Table 4");
-    let e = pct(sm.mean_kn, reference.mean_kn);
-    row(&format!("Mean crush force P_m over 0–{d} mm (kN)"), reference.mean_kn, sm.mean_kn, format!("±{}%", tol.mean_force_pct), e.abs() <= tol.mean_force_pct, "Park et al. 2022 Table 4");
-    let (fm, fs) = (em.fold_count as f64, sm.fold_count as f64);
-    row("Fold (lobe) count in 0–343 mm", fm, fs, format!("±{}", tol.fold_count_abs), (fs - fm).abs() <= tol.fold_count_abs, "Forge count of force peaks in digitized Park et al. 2022 Fig. 3 (not stated by the authors)");
-    if let (Some(pm), Some(ps)) = (em.mean_fold_pitch_mm, sm.mean_fold_pitch_mm) {
-        row("Mean fold pitch (mm)", pm, ps, "info only".into(), true, "Forge, from digitized Fig. 3");
+    if reference.peak_kn.is_nan() {
+        row("Peak force (kN)", f64::NAN, sm.peak_kn, "not assessed".into(), false, &reference.peak_source);
+    } else {
+        let e = pct(sm.peak_kn, reference.peak_kn);
+        row("Peak force (kN)", reference.peak_kn, sm.peak_kn, format!("±{}%", tol.peak_force_pct), e.abs() <= tol.peak_force_pct, &reference.peak_source);
     }
-    rows.push(Row {
+    let e = pct(sm.mean_kn, reference.mean_kn);
+    row(&format!("Mean crush force over 0–{d:.0} mm (kN)"), reference.mean_kn, sm.mean_kn, format!("±{}%", tol.mean_force_pct), e.abs() <= tol.mean_force_pct, &reference.mean_source);
+    let fm = reference.fold_count.or(em.as_ref().map(|m| m.fold_count as f64));
+    let fs = sm.fold_count as f64;
+    match fm {
+        Some(fm) => row(&format!("Fold (lobe) count in 0–{d:.0} mm"), fm, fs, format!("±{}", tol.fold_count_abs), (fs - fm).abs() <= tol.fold_count_abs, &reference.fold_source),
+        None => row(&format!("Fold (lobe) count in 0–{d:.0} mm"), f64::NAN, fs, "not assessed".into(), false, &reference.fold_source),
+    }
+    if let Some(em) = &em {
+        if let (Some(pm), Some(ps)) = (em.mean_fold_pitch_mm, sm.mean_fold_pitch_mm) {
+            row("Mean fold pitch (mm)", pm, ps, "info only".into(), true, "Forge, from digitized curve");
+        }
+    }
+    if case.loading != crate::params::Loading::ImposedVelocity {
+        let e = pct(sm.max_travel_mm, d);
+        row("Final crush distance (mm)", d, sm.max_travel_mm, "±10%".into(), e.abs() <= 10.0, &reference.crush_length_source);
+    }
+    if let Some(iso) = &iso { rows.push(Row {
         quantity: "ISO/TS 18571 overall score (vs digitized curve)".into(),
-        measured: 1.0,
+        measured: None,
         simulated: iso.overall,
-        error_pct: f64::NAN,
+        error_pct: None,
         tolerance: format!("≥ {} (fair)", tol.iso_min_overall),
         pass: iso.overall >= tol.iso_min_overall,
-        measured_source: "digitized Park et al. 2022 Fig. 3".into(),
-    });
+        measured_source: "digitized measured curve".into(),
+    }); }
     CaseReport {
         case,
         mesh,
         run,
         simulated: sm,
+        reference: reference.clone(),
         experiment_digitized: em,
         quality: q,
         iso18571: iso,
@@ -223,10 +254,14 @@ pub fn case_markdown(r: &CaseReport) -> String {
     writeln!(s, "Mesh: {} shells, {} x {} elements of {:.2} x {:.2} mm. Material: {}. Top BC: {:?}. Platen speed {} mm/s.\n", r.mesh.elements, 4 * r.mesh.per_side, r.mesh.n_axial, r.mesh.element_size_mm.0, r.mesh.element_size_mm.1, r.case.material.name, r.case.top_boundary, r.case.platen_speed_mm_s).unwrap();
     writeln!(s, "| Quantity | Measured | Simulated | Error | Tolerance | Result |\n|---|---|---|---|---|---|").unwrap();
     for row in &r.rows {
-        writeln!(s, "| {} | {} | {} | {} | {} | {} |", row.quantity, f(row.measured, 1), f(row.simulated, 2), if row.error_pct.is_nan() { "–".into() } else { format!("{:+.1}%", row.error_pct) }, row.tolerance, if row.pass { "PASS" } else { "FAIL" }).unwrap();
+        let res = if row.tolerance == "not assessed" { "n/a" } else if row.pass { "PASS" } else { "FAIL" };
+        writeln!(s, "| {} | {} | {} | {} | {} | {} |", row.quantity, row.measured.map_or("–".into(), |m| f(m, 1)), f(row.simulated, 2), row.error_pct.map_or("–".into(), |e| format!("{e:+.1}%")), row.tolerance, res).unwrap();
     }
-    let i = &r.iso18571;
-    writeln!(s, "\nISO/TS 18571 (Forge implementation, indicative): corridor {:.3}, phase {:.3}, magnitude {:.3}, slope {:.3}, overall {:.3} ({}).\n", i.corridor, i.phase, i.magnitude, i.slope, i.overall, i.rating).unwrap();
+    match &r.iso18571 {
+        Some(i) => writeln!(s, "\nISO/TS 18571 (Forge implementation, indicative): corridor {:.3}, phase {:.3}, magnitude {:.3}, slope {:.3}, overall {:.3} ({}).\n", i.corridor, i.phase, i.magnitude, i.slope, i.overall, i.rating).unwrap(),
+        None => writeln!(s, "\nISO/TS 18571: not computed (no digitized measured curve for this case).\n").unwrap(),
+    }
+    writeln!(s, "Reference: {} doi:{} ({}). Specimen: {}.\n", r.reference.citation, r.reference.doi, r.reference.licence, r.reference.specimen).unwrap();
     let q = &r.quality;
     writeln!(s, "Run quality: max KE/IE {:.4}, hourglass/IE {:.4}, max added mass {:.3}%, platen work vs IE {:+.2}%.\n", q.max_ke_ratio, q.hourglass_ratio_end, q.max_added_mass_pct, q.work_vs_internal_energy_pct).unwrap();
     writeln!(s, "{}", r.note).unwrap();

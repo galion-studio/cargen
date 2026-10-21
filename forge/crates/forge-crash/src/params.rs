@@ -28,6 +28,37 @@ pub enum TopBoundary {
     FrictionWall,
 }
 
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Default)]
+#[serde(rename_all = "snake_case")]
+pub enum Section {
+    /// Square tube; `breadth_mm` is the outer side b.
+    #[default]
+    Square,
+    /// Circular tube; `breadth_mm` is the outer diameter.
+    Circular,
+}
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Default)]
+#[serde(rename_all = "snake_case")]
+pub enum BottomBoundary {
+    /// Bottom ring clamped (all DOF).
+    #[default]
+    Clamped,
+    /// Tube stands on a fixed rigid plane with Coulomb friction (`friction`).
+    FrictionWall,
+}
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Default)]
+#[serde(rename_all = "snake_case")]
+pub enum Loading {
+    /// Platen driven at `platen_speed_mm_s` (ramped) to `crush_distance_mm`.
+    #[default]
+    ImposedVelocity,
+    /// Free rigid striker of given mass and initial speed (drop test); runs until
+    /// `crush_distance_mm` would be reached at constant speed or the striker stops.
+    DropMass { mass_t: f64, velocity_mm_s: f64 },
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct TubeCrush {
     pub case_id: String,
@@ -64,12 +95,34 @@ pub struct TubeCrush {
     pub threads: u32,
     /// Floor for the nodal time step as a fraction of h_min/c (0 disables mass scaling).
     pub dt_floor_fraction: f64,
+    #[serde(default)]
+    pub section: Section,
+    #[serde(default)]
+    pub bottom_boundary: BottomBoundary,
+    #[serde(default)]
+    pub loading: Loading,
+    /// Cowper-Symonds (D [1/s], q) strain-rate scaling of the hardening curve; None = rate independent.
+    #[serde(default)]
+    pub cowper_symonds: Option<(f64, f64)>,
+    /// Number of circumferential imperfection waves for circular tubes (0 = axisymmetric).
+    #[serde(default)]
+    pub circ_waves: u32,
+    /// Explicit imperfection amplitude (mm) overriding the Park et al. formula when set.
+    #[serde(default)]
+    pub imperfection_w0_mm: Option<f64>,
 }
 
 impl TubeCrush {
     /// Mid-surface section width a = b - t (sharp-corner idealisation).
     pub fn midline_width(&self) -> f64 {
         self.breadth_mm - self.thickness_mm
+    }
+    /// Mid-surface perimeter (mm).
+    pub fn midline_perimeter(&self) -> f64 {
+        match self.section {
+            Section::Square => 4.0 * self.midline_width(),
+            Section::Circular => std::f64::consts::PI * self.midline_width(),
+        }
     }
     /// Yield stress = first point of the hardening curve.
     pub fn yield_mpa(&self) -> f64 {
@@ -81,9 +134,17 @@ impl TubeCrush {
     }
     /// w0 = amp * beta^2 * t (mm).
     pub fn imperfection_w0(&self) -> f64 {
+        if let Some(w) = self.imperfection_w0_mm {
+            return w;
+        }
         self.imperfection_amp * self.beta().powi(2) * self.thickness_mm
     }
     pub fn end_time_s(&self) -> f64 {
+        if let Loading::DropMass { velocity_mm_s, .. } = self.loading {
+            // the striker decelerates; allow 3x the constant-speed time, the run is
+            // stopped earlier by nothing, so keep it bounded
+            return 3.0 * self.crush_distance_mm / velocity_mm_s;
+        }
         // travel = v * (t_end - ramp/2) for a linear ramp
         self.crush_distance_mm / self.platen_speed_mm_s + 0.5 * self.ramp_time_s
     }
@@ -154,5 +215,11 @@ pub fn p1a_us2_baseline(element_size_mm: f64) -> TubeCrush {
         anim_frames: 8,
         threads: 4,
         dt_floor_fraction: 0.5,
+        section: Section::Square,
+        bottom_boundary: BottomBoundary::Clamped,
+        loading: Loading::ImposedVelocity,
+        cowper_symonds: None,
+        circ_waves: 0,
+        imperfection_w0_mm: None,
     }
 }

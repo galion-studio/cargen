@@ -5,7 +5,7 @@
 //! Units: Mg, mm, s.
 
 use crate::mesh::Mesh;
-use crate::params::{TopBoundary, TubeCrush};
+use crate::params::{BottomBoundary, Loading, TopBoundary, TubeCrush};
 use std::fmt::Write;
 
 pub const WALL_NODE_ID: u32 = 1;
@@ -68,16 +68,40 @@ pub fn build(p: &TubeCrush, mesh: &Mesh, run_name: &str) -> Deck {
     writeln!(s, "#        Init. dens.\n{}", f20(p.material.density_t_per_mm3)).unwrap();
     writeln!(s, "#                  E                  Nu           Eps_p_max               Eps_t               Eps_m").unwrap();
     writeln!(s, "{}{}{}{}{}", f20(p.material.youngs_mpa), f20(p.material.poisson), f20(0.0), f20(0.0), f20(0.0)).unwrap();
+    // strain-rate curves: static curve scaled by the Cowper-Symonds factor
+    let rates: Vec<f64> = match p.cowper_symonds {
+        None => vec![0.0],
+        Some(_) => vec![0.0, 1.0, 10.0, 100.0, 1000.0, 10000.0],
+    };
+    let nf = rates.len() as u32;
     writeln!(s, "#  N_funct  F_smooth              C_hard               F_cut               Eps_f                  VP").unwrap();
-    writeln!(s, "{}{}{}{}{}{:>10}{}", i10(1), i10(0), f20(0.0), f20(0.0), f20(0.0), "", i10(0)).unwrap();
+    // with rate curves: interpolate between them (Fsmooth=1), filter the strain rate at
+    // 10 kHz (Fcut) and use the plastic strain rate (VP=1)
+    let (fsm, fcut, vp) = if nf > 1 { (1, 1.0e4, 1) } else { (0, 0.0, 0) };
+    writeln!(s, "{}{}{}{}{}{:>10}{}", i10(nf), i10(fsm), f20(0.0), f20(fcut), f20(0.0), "", i10(vp)).unwrap();
     writeln!(s, "#  fct_IDp              Fscale   Fct_IDE                EInf                  CE").unwrap();
     writeln!(s, "{}{}{}{}{}", i10(0), f20(0.0), i10(0), f20(0.0), f20(0.0)).unwrap();
-    writeln!(s, "# func_ID1\n{}", i10(FN_HARD)).unwrap();
-    writeln!(s, "#           Fscale_1\n{}", f20(1.0)).unwrap();
-    writeln!(s, "#          Eps_dot_1\n{}", f20(0.0)).unwrap();
-    writeln!(s, "/FUNCT/{FN_HARD}\nhardening: plastic strain vs true stress (MPa)").unwrap();
-    for (e, sig) in &p.material.hardening {
-        writeln!(s, "{}{}", f20(*e), f20(*sig)).unwrap();
+    writeln!(s, "# func_IDs").unwrap();
+    for chunk in (0..nf).collect::<Vec<_>>().chunks(5) {
+        for k in chunk { s.push_str(&i10(FN_HARD + k)); }
+        s.push('\n');
+    }
+    writeln!(s, "# Fscale_i").unwrap();
+    for chunk in rates.chunks(5) {
+        for _ in chunk { s.push_str(&f20(1.0)); }
+        s.push('\n');
+    }
+    writeln!(s, "# Eps_dot_i").unwrap();
+    for chunk in rates.chunks(5) {
+        for r in chunk { s.push_str(&f20(*r)); }
+        s.push('\n');
+    }
+    for (k, r) in rates.iter().enumerate() {
+        let factor = match p.cowper_symonds { Some((d, q)) if *r > 0.0 => 1.0 + (r / d).powf(1.0 / q), _ => 1.0 };
+        writeln!(s, "/FUNCT/{}\nhardening at strain rate {r} 1/s: plastic strain vs true stress (MPa), CS factor {factor:.4}", FN_HARD + k as u32).unwrap();
+        for (e, sig) in &p.material.hardening {
+            writeln!(s, "{}{}", f20(*e), f20(*sig * factor)).unwrap();
+        }
     }
 
     // ---- shell property: QEPH (Ishell=24), N integration points
@@ -110,12 +134,25 @@ pub fn build(p: &TubeCrush, mesh: &Mesh, run_name: &str) -> Deck {
     writeln!(s, "/SURF/PART/{SURF_TUBE}\ntube surface\n{}", i10(PART_TUBE)).unwrap();
 
     // ---- bottom end clamped (specimen standing on the base block)
-    writeln!(s, "/BCS/1\nbottom clamped\n#  Tra rot   skew_ID  grnod_ID\n   111 111{}{}", i10(0), i10(GRN_BOTTOM)).unwrap();
+    match p.bottom_boundary {
+        BottomBoundary::Clamped => {
+            writeln!(s, "/BCS/1\nbottom clamped\n#  Tra rot   skew_ID  grnod_ID\n   111 111{}{}", i10(0), i10(GRN_BOTTOM)).unwrap();
+        }
+        BottomBoundary::FrictionWall => {
+            writeln!(s, "/RWALL/PLANE/2\nbase plate (fixed)").unwrap();
+            writeln!(s, "#  node_ID     Slide  grnd_ID1  grnd_ID2\n{}{}{}{}", i10(0), i10(2), i10(GRN_TUBE), i10(0)).unwrap();
+            writeln!(s, "#                  d                fric            Diameter                           ifq").unwrap();
+            writeln!(s, "{}{}{}{:>20}{}", f20(0.0), f20(p.friction), f20(0.0), "", i10(0)).unwrap();
+            writeln!(s, "#                 XM                  YM                  ZM\n{}{}{}", f20(0.0), f20(0.0), f20(-1.0e-3)).unwrap();
+            writeln!(s, "#                XM1                 YM1                 ZM1\n{}{}{}", f20(0.0), f20(0.0), f20(10.0)).unwrap();
+        }
+    }
+    let excl = if p.bottom_boundary == BottomBoundary::Clamped { GRN_BOTTOM } else { 0 };
 
     // ---- moving rigid platen
     let slide = match p.top_boundary { TopBoundary::TiedWall => 1, TopBoundary::FrictionWall => 2 };
     writeln!(s, "/RWALL/PLANE/1\nplaten").unwrap();
-    writeln!(s, "#  node_ID     Slide  grnd_ID1  grnd_ID2\n{}{}{}{}", i10(WALL_NODE_ID), i10(slide), i10(GRN_TUBE), i10(GRN_BOTTOM)).unwrap();
+    writeln!(s, "#  node_ID     Slide  grnd_ID1  grnd_ID2\n{}{}{}{}", i10(WALL_NODE_ID), i10(slide), i10(GRN_TUBE), i10(excl)).unwrap();
     if slide == 2 {
         writeln!(s, "#                  d                fric            Diameter                           ifq").unwrap();
         writeln!(s, "{}{}{}{:>20}{}", f20(0.0), f20(p.friction), f20(0.0), "", i10(0)).unwrap();
@@ -124,10 +161,12 @@ pub fn build(p: &TubeCrush, mesh: &Mesh, run_name: &str) -> Deck {
         writeln!(s, "{}{:>20}{}", f20(0.0), "", f20(0.0)).unwrap();
     }
     writeln!(s, "#               Mass                 VX0                 VY0                 VZ0").unwrap();
-    writeln!(s, "{}{}{}{}", f20(1.0e-3), f20(0.0), f20(0.0), f20(0.0)).unwrap();
+    let (wmass, v0) = match p.loading { Loading::DropMass { mass_t, velocity_mm_s } => (mass_t, -velocity_mm_s), _ => (1.0e-3, 0.0) };
+    writeln!(s, "{}{}{}{}", f20(wmass), f20(0.0), f20(0.0), f20(v0)).unwrap();
     writeln!(s, "#                XM1                 YM1                 ZM1").unwrap();
     writeln!(s, "{}{}{}", f20(0.0), f20(0.0), f20(p.length_mm - 10.0)).unwrap();
 
+    if p.loading == Loading::ImposedVelocity {
     // platen velocity: linear ramp to 1 then constant, scaled by -v (moves -z)
     writeln!(s, "/FUNCT/{FN_RAMP}\nplaten speed ramp").unwrap();
     if p.ramp_time_s > 0.0 {
@@ -142,6 +181,7 @@ pub fn build(p: &TubeCrush, mesh: &Mesh, run_name: &str) -> Deck {
     writeln!(s, "{}{:>10}{}{}{}{}{}", i10(FN_RAMP), "Z", i10(0), i10(0), i10(GRN_WALL), i10(0), i10(0)).unwrap();
     writeln!(s, "#            Scale_x             Scale_y              Tstart               Tstop").unwrap();
     writeln!(s, "{}{}{}{}", f20(1.0), f20(-p.platen_speed_mm_s), f20(0.0), f20(0.0)).unwrap();
+    }
 
     // ---- self contact of the tube wall
     let gapmax = t.min(0.9 * hmin);

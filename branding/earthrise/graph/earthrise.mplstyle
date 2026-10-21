@@ -1,0 +1,48 @@
+# Earthrise graph style for cargen (matplotlib rcParams). SPDX-License-Identifier: MIT
+# Use: plt.style.use("branding/earthrise/graph/earthrise.mplstyle")
+# Light (docs) default. For dark slides, also apply earthrise-dark.mplstyle on top.
+# Fonts: Inter (text), IBM Plex Mono (optional for tick labels); both SIL OFL 1.1. Falls back to DejaVu Sans.
+font.family        : sans-serif
+font.sans-serif    : Inter, DejaVu Sans
+font.size          : 10.5
+text.color         : 0B1A2E
+axes.labelcolor    : 0B1A2E
+axes.titlesize     : 13
+axes.titleweight   : 600
+axes.titlelocation : left
+axes.titlepad      : 12
+axes.labelsize     : 10.5
+axes.labelpad      : 6
+axes.facecolor     : FFFFFF
+figure.facecolor   : FFFFFF
+savefig.facecolor  : FFFFFF
+axes.edgecolor     : 4A5D73
+axes.linewidth     : 0.8
+axes.spines.top    : False
+axes.spines.right  : False
+axes.grid          : True
+axes.axisbelow     : True
+grid.color         : DCE5EC
+grid.linewidth     : 0.6
+grid.linestyle     : -
+xtick.color        : 4A5D73
+ytick.color        : 4A5D73
+xtick.labelcolor   : 0B1A2E
+ytick.labelcolor   : 0B1A2E
+xtick.direction    : out
+ytick.direction    : out
+xtick.major.size   : 3.5
+ytick.major.size   : 3.5
+xtick.minor.size   : 2
+ytick.minor.size   : 2
+# series order: deep teal, sunrise/ember, space navy, deep aurora green, slate, aurora teal (all >= 3:1 on white except the last)
+axes.prop_cycle    : cycler('color', ['0E7C74', 'D9831A', '12304A', '2A9D6E', '4A5D73', '1FB5A8'])
+lines.linewidth    : 1.6
+lines.markersize   : 6
+patch.edgecolor    : FFFFFF
+legend.frameon     : False
+legend.fontsize    : 8.5
+legend.labelcolor  : 0B1A2E
+figure.dpi         : 100
+savefig.dpi        : 160
+savefig.bbox       : standard

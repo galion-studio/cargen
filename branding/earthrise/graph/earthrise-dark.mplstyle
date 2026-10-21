@@ -1,0 +1,14 @@
+# Earthrise dark overlay (apply after earthrise.mplstyle). SPDX-License-Identifier: MIT
+text.color         : F4F7FB
+axes.labelcolor    : F4F7FB
+axes.facecolor     : 0B1A2E
+figure.facecolor   : 0B1A2E
+savefig.facecolor  : 0B1A2E
+axes.edgecolor     : 9FB3C8
+grid.color         : 1C3A55
+xtick.color        : 9FB3C8
+ytick.color        : 9FB3C8
+xtick.labelcolor   : F4F7FB
+ytick.labelcolor   : F4F7FB
+legend.labelcolor  : F4F7FB
+axes.prop_cycle    : cycler('color', ['3DDC97', 'F5A524', 'F4F7FB', '6FE7C8', '9FB3C8', '1FB5A8'])

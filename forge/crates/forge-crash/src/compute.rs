@@ -58,7 +58,8 @@ impl CpuOpenCourant {
         c.current_dir(dir)
             .env("LD_LIBRARY_PATH", ld)
             .env("RAD_CFG_PATH", self.root.join("hm_cfg_files"))
-            .env("OMP_STACKSIZE", "400m");
+            .env("OMP_STACKSIZE", "400m")
+            .env("OMP_WAIT_POLICY", "PASSIVE");
         c
     }
 }

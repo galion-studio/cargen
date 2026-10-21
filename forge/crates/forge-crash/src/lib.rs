@@ -4,6 +4,7 @@
 //! The solver (OpenCourant, AGPL-3.0) is never linked: it runs as a separate, unmodified
 //! program. This crate only writes its input files and reads its output files.
 
+pub mod cases;
 pub mod compute;
 pub mod deck;
 pub mod experiment;

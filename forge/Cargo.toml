@@ -2,7 +2,7 @@
 # Copyright (c) 3000 Galion / galion-studio
 [workspace]
 resolver = "2"
-members = ["crates/forge-crash"]
+members = ["crates/forge-crash", "crates/forge-rigid"]
 
 [workspace.package]
 version = "0.1.0"
