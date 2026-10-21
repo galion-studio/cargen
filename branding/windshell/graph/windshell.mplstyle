@@ -1,0 +1,52 @@
+# Wind & Shell graph style for cargen (matplotlib rcParams). SPDX-License-Identifier: MIT
+# Use:  plt.style.use("branding/windshell/graph/windshell.mplstyle")
+#       (add windshell-dark.mplstyle on top for dark slides)
+# Fonts: IBM Plex Sans (text) + IBM Plex Mono (captions, set per text), SIL OFL 1.1; falls back to DejaVu Sans.
+# Colour meaning: orange = cargen model / simulation, blues + graphite = physical test data,
+# grey dashed = unvalidated estimate. Never draw an unvalidated number in orange.
+font.family        : sans-serif
+font.sans-serif    : IBM Plex Sans, DejaVu Sans
+font.monospace     : IBM Plex Mono, DejaVu Sans Mono
+font.size          : 10.5
+text.color         : 16202A
+axes.labelcolor    : 16202A
+axes.titlesize     : 13
+axes.titleweight   : normal
+axes.titlelocation : left
+axes.titlepad      : 12
+axes.labelsize     : 10.5
+axes.labelpad      : 6
+axes.facecolor     : FFFFFF
+figure.facecolor   : F4F1EA
+savefig.facecolor  : F4F1EA
+axes.edgecolor     : 5A6470
+axes.linewidth     : 0.8
+axes.spines.top    : False
+axes.spines.right  : False
+axes.grid          : True
+axes.grid.which    : major
+axes.axisbelow     : True
+grid.color         : E6E1D6
+grid.linewidth     : 0.6
+grid.linestyle     : -
+xtick.color        : 5A6470
+ytick.color        : 5A6470
+xtick.labelcolor   : 16202A
+ytick.labelcolor   : 16202A
+xtick.direction    : out
+ytick.direction    : out
+xtick.major.size   : 3.5
+ytick.major.size   : 3.5
+xtick.minor.size   : 2
+ytick.minor.size   : 2
+# test-data series first (all >= 3:1 on white), then the model colour
+axes.prop_cycle    : cycler('color', ['2F5F8F', '16202A', '4F86BF', '5A6470', 'B5470C'])
+lines.linewidth    : 1.6
+lines.markersize   : 6
+patch.edgecolor    : FFFFFF
+legend.frameon     : False
+legend.fontsize    : 8.5
+legend.labelcolor  : 16202A
+figure.dpi         : 100
+savefig.dpi        : 160
+savefig.bbox       : standard

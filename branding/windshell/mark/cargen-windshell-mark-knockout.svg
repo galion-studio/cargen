@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="cargen mark, knockout tile"><title>cargen mark, knockout tile</title>
+<!-- SPDX-License-Identifier: MIT. Copyright (c) 2026 galion-studio. Original artwork, 'Wind & Shell' concept for cargen. Letters are outlines of IBM Plex Sans / IBM Plex Mono (SIL OFL 1.1). -->
+<defs><mask id="ko-t" maskUnits="userSpaceOnUse" x="-40" y="-40" width="340" height="340"><rect x="-40" y="-40" width="340" height="340" fill="#000"/><rect x="8" y="8" width="240" height="240" rx="56" fill="#ffffff"/>
+<g transform="translate(0 -13.58)">
+<defs><clipPath id="kot-b"><path d="M206.01 103.51 C134.61 81.51 77.00 134.00 26.00 140.00 C28.00 147.20 46.40 164.50 87.20 170.00 L196.00 170.00 A34 34 0 0 0 206.01 103.51 Z"/></clipPath><mask id="kot-n" maskUnits="userSpaceOnUse" x="-40" y="-40" width="340" height="340"><rect x="-40" y="-40" width="340" height="340" fill="#fff"/><circle cx="77.00" cy="136.00" r="88.40" fill="#000"/></mask></defs>
+<path d="M206.01 103.51 C134.61 81.51 77.00 134.00 26.00 140.00 C28.00 147.20 46.40 164.50 87.20 170.00 L196.00 170.00 A34 34 0 0 0 206.01 103.51 Z" fill="#000000"/>
+<g clip-path="url(#kot-b)"><rect x="-40" y="-40" width="340" height="340" fill="#000000" mask="url(#kot-n)"/>
+<circle cx="77.00" cy="136.00" r="103.90" fill="none" stroke="#ffffff" stroke-width="5.0"/>
+<circle cx="77.00" cy="136.00" r="116.93" fill="none" stroke="#ffffff" stroke-width="5.0"/>
+</g>
+<circle cx="84" cy="172" r="18.0" fill="#ffffff"/>
+<circle cx="84" cy="172" r="13" fill="#000000"/>
+<circle cx="157" cy="172" r="18.0" fill="#ffffff"/>
+<circle cx="157" cy="172" r="13" fill="#000000"/>
+</g></mask><mask id="ko-c" maskUnits="userSpaceOnUse" x="-40" y="-40" width="340" height="340"><rect x="-40" y="-40" width="340" height="340" fill="#000"/><g transform="translate(0 -13.58)">
+<defs><clipPath id="koc-b"><path d="M206.01 103.51 C134.61 81.51 77.00 134.00 26.00 140.00 C28.00 147.20 46.40 164.50 87.20 170.00 L196.00 170.00 A34 34 0 0 0 206.01 103.51 Z"/></clipPath><mask id="koc-n" maskUnits="userSpaceOnUse" x="-40" y="-40" width="340" height="340"><rect x="-40" y="-40" width="340" height="340" fill="#fff"/><circle cx="77.00" cy="136.00" r="88.40" fill="#000"/></mask></defs>
+<path d="M206.01 103.51 C134.61 81.51 77.00 134.00 26.00 140.00 C28.00 147.20 46.40 164.50 87.20 170.00 L196.00 170.00 A34 34 0 0 0 206.01 103.51 Z" fill="#000000"/>
+<g clip-path="url(#koc-b)"><rect x="-40" y="-40" width="340" height="340" fill="#ffffff" mask="url(#koc-n)"/>
+<circle cx="77.00" cy="136.00" r="103.90" fill="none" stroke="#000000" stroke-width="5.0"/>
+<circle cx="77.00" cy="136.00" r="116.93" fill="none" stroke="#000000" stroke-width="5.0"/>
+</g>
+<circle cx="84" cy="172" r="18.0" fill="#000000"/>
+<circle cx="84" cy="172" r="13" fill="#000000"/>
+<circle cx="157" cy="172" r="18.0" fill="#000000"/>
+<circle cx="157" cy="172" r="13" fill="#000000"/>
+</g></mask></defs><rect x="-40" y="-40" width="340" height="340" fill="#16202A" mask="url(#ko-t)"/><rect x="-40" y="-40" width="340" height="340" fill="#F26B1D" mask="url(#ko-c)"/>
+</svg>

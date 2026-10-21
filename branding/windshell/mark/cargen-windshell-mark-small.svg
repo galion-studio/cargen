@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="cargen mark, small sizes"><title>cargen mark, small sizes</title>
+<!-- SPDX-License-Identifier: MIT. Copyright (c) 2026 galion-studio. Original artwork, 'Wind & Shell' concept for cargen. Letters are outlines of IBM Plex Sans / IBM Plex Mono (SIL OFL 1.1). -->
+<rect x="0" y="0" width="256" height="256" rx="52" fill="#16202A"/>
+<g transform="translate(0 -9.82)">
+<defs><clipPath id="sm-b"><path d="M215.12 86.00 C138.32 62.00 67.60 126.00 10.00 132.00 C12.00 150.00 33.04 167.00 79.12 172.00 L202.00 172.00 A44 44 0 0 0 215.12 86.00 Z"/></clipPath><mask id="sm-n" maskUnits="userSpaceOnUse" x="-40" y="-40" width="340" height="340"><rect x="-40" y="-40" width="340" height="340" fill="#fff"/><circle cx="54.60" cy="128.00" r="114.40" fill="#000"/></mask></defs>
+<path d="M215.12 86.00 C138.32 62.00 67.60 126.00 10.00 132.00 C12.00 150.00 33.04 167.00 79.12 172.00 L202.00 172.00 A44 44 0 0 0 215.12 86.00 Z" fill="#F4F1EA"/>
+<g clip-path="url(#sm-b)"><rect x="-40" y="-40" width="340" height="340" fill="#F26B1D" mask="url(#sm-n)"/>
+<circle cx="54.60" cy="128.00" r="148.40" fill="none" stroke="#16202A" stroke-width="16.0"/>
+</g>
+<circle cx="78" cy="174" r="32.0" fill="#16202A"/>
+<circle cx="78" cy="174" r="21" fill="#F4F1EA"/>
+<circle cx="172" cy="174" r="32.0" fill="#16202A"/>
+<circle cx="172" cy="174" r="21" fill="#F4F1EA"/>
+</g>
+</svg>

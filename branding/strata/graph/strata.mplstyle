@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: MIT
+# cargen Strata graph style (light). Colour rule: orange = validated simulation only,
+# blue = physical test, grey dashed = theory / unvalidated estimate.
+font.family: IBM Plex Sans
+font.size: 10.5
+figure.facecolor: F2EEE6
+axes.facecolor: FBFAF7
+savefig.facecolor: F2EEE6
+axes.edgecolor: 16202A
+axes.linewidth: 1.0
+axes.labelcolor: 16202A
+axes.titlecolor: 16202A
+axes.titleweight: 600
+axes.titlelocation: left
+axes.titlepad: 12
+axes.spines.top: False
+axes.spines.right: False
+axes.grid: True
+axes.axisbelow: True
+grid.color: D9D2C5
+grid.linewidth: 0.6
+xtick.color: 5A6470
+ytick.color: 5A6470
+xtick.labelcolor: 16202A
+ytick.labelcolor: 16202A
+xtick.direction: out
+ytick.direction: out
+text.color: 16202A
+legend.frameon: False
+legend.fontsize: 8.5
+lines.linewidth: 1.6
+axes.prop_cycle: cycler('color', ['2F5F8F', '16202A', '6F90B4', '5A6470'])
+savefig.dpi: 160

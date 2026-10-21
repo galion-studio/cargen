@@ -1,0 +1,198 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT -->
+<!-- Copyright (c) 2026 galion-studio. Static mockup of the MVP flow. No external resources. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forge MVP flow (mockup)</title>
+<style>
+:root{--navy:#0b1f3a;--navy2:#13305a;--line:#d5dce6;--muted:#5a6b82;--bg:#f5f7fa;--ok:#1b6e3c;--warn:#8a5a00;--bad:#9b1c1c}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--navy);background:var(--bg)}
+header{background:var(--navy);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:10px}
+header b{font-size:17px;letter-spacing:.5px}
+header small{opacity:.75;margin-left:auto}
+.tag{display:inline-block;border:1px dashed rgba(255,255,255,.5);padding:2px 8px;border-radius:4px;font-size:12px;opacity:.8}
+nav.steps{display:flex;overflow-x:auto;background:#fff;border-bottom:1px solid var(--line)}
+nav.steps button{flex:1 0 auto;border:0;background:none;padding:12px 14px;font:inherit;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.steps button.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600}
+nav.steps button span{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--line);color:var(--navy);font-size:12px;margin-right:6px}
+nav.steps button.on span{background:var(--navy);color:#fff}
+main{max-width:980px;margin:0 auto;padding:18px}
+section{display:none}section.on{display:block}
+h1{font-size:20px;margin:4px 0 4px}p.lead{color:var(--muted);margin:0 0 16px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px}
+.card.pick{cursor:pointer}.card.pick.sel{border:2px solid var(--navy);padding:13px}
+.card.off{opacity:.55;cursor:not-allowed}
+.card h3{margin:0 0 4px;font-size:16px}.card p{margin:4px 0;color:var(--muted);font-size:14px}
+.lbl{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;border-radius:999px;border:1px solid currentColor;margin:2px 4px 2px 0}
+.l-val{color:var(--ok)}.l-th{color:var(--navy2)}.l-est{color:var(--warn)}.l-nc{color:var(--muted)}
+.two{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 3px}
+input,select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;color:var(--navy);background:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+.ok{color:var(--ok);font-weight:600}.warn{color:var(--warn);font-weight:600}.bad{color:var(--bad);font-weight:600}
+.src{font-size:12px;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.btn{border:1px solid var(--navy);background:#fff;color:var(--navy);padding:10px 16px;border-radius:8px;font:inherit;cursor:pointer}
+.btn.pri{background:var(--navy);color:#fff}
+.dl{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.note{background:#eef2f8;border-left:3px solid var(--navy);padding:10px 12px;border-radius:4px;font-size:14px;margin-top:12px}
+svg{width:100%;height:auto;display:block}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+<header><b>FORGE</b><span class="tag">tagline slot: owner decides</span><small>MVP flow mockup</small></header>
+<nav class="steps" id="nav">
+ <button class="on" data-s="0"><span>1</span>Category</button>
+ <button data-s="1"><span>2</span>Generate</button>
+ <button data-s="2"><span>3</span>Manufacturability</button>
+ <button data-s="3"><span>4</span>Crash &amp; air</button>
+ <button data-s="4"><span>5</span>Export</button>
+</nav>
+<main>
+
+<section class="on">
+ <h1>Pick a category</h1>
+ <p class="lead">Every number in Forge carries a label: <span class="lbl l-val">Validated</span><span class="lbl l-th">Theory-checked</span><span class="lbl l-est">Unvalidated estimate</span><span class="lbl l-nc">Not computed</span></p>
+ <div class="grid">
+  <div class="card pick sel"><h3>Crush member (steel)</h3><p>Crash box, straight rail segment, absorber tube. Square or circular.</p><span class="lbl l-th">Theory-checked</span><span class="lbl l-est">FE in validation</span></div>
+  <div class="card pick"><h3>Frame tube</h3><p>Straight or single-bend tube with miter or cope cuts.</p><span class="lbl l-nc">Stiffness not computed</span></div>
+  <div class="card off"><h3>Tube node</h3><p>2–4 tubes at a node, gussets.</p><span class="lbl l-nc">Later in 2026</span></div>
+  <div class="card off"><h3>Kart / buggy frame</h3><p>Full tube frame, BOM, cut and weld plan.</p><span class="lbl l-nc">Later in 2026</span></div>
+  <div class="card off"><h3>Crush member (Al / Mg / Ti)</h3><p>Behind a flag.</p><span class="lbl l-est">Unvalidated</span></div>
+  <div class="card off"><h3>Full car</h3><p>Gated by the P1b full-frontal validation.</p><span class="lbl l-nc">Not in 2026</span></div>
+ </div>
+</section>
+
+<section>
+ <h1>Generate a part</h1>
+ <p class="lead">Example: the Park 2022 US-2 specimen, the P1a reference tube.</p>
+ <div class="two">
+  <div class="card">
+   <label>Describe it (optional; the AI only fills the fields below, never the numbers)</label>
+   <input value="square steel crash box, 100 mm, 2.8 mm wall">
+   <label>Section</label><select><option>Square</option><option>Circular</option></select>
+   <label>Width c (mm)</label><input value="100">
+   <label>Wall thickness t (mm)</label><input value="2.8">
+   <label>Length L (mm)</label><input value="450">
+   <label>Material (cited)</label><select><option>ASTM A500 Gr. A (Park 2022, Table 2)</option><option>Mild steel (Abramowicz &amp; Jones 1986)</option></select>
+   <label>Crush trigger</label><select><option>None</option><option>Bead (not computed)</option></select>
+  </div>
+  <div class="card">
+   <svg viewBox="0 0 320 220" role="img" aria-label="Tube preview">
+    <rect width="320" height="220" fill="#f5f7fa"/>
+    <polygon points="70,60 130,30 130,180 70,210" fill="#13305a"/>
+    <polygon points="130,30 260,30 260,180 130,180" fill="#0b1f3a"/>
+    <polygon points="70,60 130,30 260,30 200,60" fill="#3d5a85"/>
+    <polygon points="200,60 260,30 260,180 200,210" fill="#1d3f70"/>
+    <polygon points="70,60 200,60 200,210 70,210" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <text x="135" y="215" fill="#5a6b82" font-size="11" text-anchor="middle">c = 100 mm</text>
+    <text x="275" y="110" fill="#5a6b82" font-size="11">L 450</text>
+   </svg>
+   <table>
+    <tr><th>Quantity</th><th>Value</th><th>Label</th></tr>
+    <tr><td>c / t</td><td>35.71</td><td><span class="lbl l-th">Geometry</span></td></tr>
+    <tr><td>Mass</td><td>≈ 3.96 kg</td><td><span class="lbl l-est">4·c·t·L·ρ, ρ 7850 assumed</span></td></tr>
+   </table>
+  </div>
+ </div>
+</section>
+
+<section>
+ <h1>Check manufacturability</h1>
+ <p class="lead">Only rules with a cited source are shown. Rule sources come from the machinery and welding workstreams.</p>
+ <div class="card">
+  <table>
+   <tr><th>Check</th><th>Result</th><th>Source</th></tr>
+   <tr><td>Section is a stock hollow section</td><td class="warn">pending</td><td class="src">machinery workstream (in research)</td></tr>
+   <tr><td>Bend radius</td><td class="ok">n/a, straight tube</td><td class="src">geometry</td></tr>
+   <tr><td>Weld access to end plates</td><td class="warn">pending</td><td class="src">welding workstream (in research)</td></tr>
+   <tr><td>Thickness vs weld process</td><td class="warn">pending</td><td class="src">welding workstream (in research)</td></tr>
+  </table>
+  <div class="note">Mockup state: rows show where results will appear. No rule is shown as pass until it has a cited source.</div>
+ </div>
+</section>
+
+<section>
+ <h1>Crash and air check</h1>
+ <p class="lead">Axial quasi-static crush of the US-2 tube.</p>
+ <div class="two">
+  <div class="card">
+   <h3>Crash: mean crush force</h3>
+   <table>
+    <tr><th>Source</th><th>kN</th><th>vs test</th><th>Label</th></tr>
+    <tr><td>Measured (Park 2022, Table 4)</td><td>101.0</td><td>—</td><td><span class="lbl l-val">Test</span></td></tr>
+    <tr><td>Closed form, A&amp;J eq. 33</td><td>122.5</td><td class="warn">+21.2 %</td><td><span class="lbl l-th">Theory-checked</span></td></tr>
+    <tr><td>OpenCourant, 10 mm mesh</td><td>114.08</td><td class="bad">+12.9 %</td><td><span class="lbl l-est">Fails ±10 %</span></td></tr>
+   </table>
+   <p class="src">Peak force: measured 337.1 kN, FE 327.46 kN (−2.9 %). FE run: OpenCourant build cb760c2, 1800 shells, 357 s engine time on 4 threads. A finer mesh is running.</p>
+   <div class="note">Range warning: the closed form over-predicts the Park/Jung A500 tubes by 10–32 %; cause not yet known.</div>
+  </div>
+  <div class="card">
+   <h3>Air: drag from a given Cd</h3>
+   <label>Cd (cited reference: Ahmed body 25°, Ahmed et al. 1984)</label><input value="0.285">
+   <label>Frontal area A (m²)</label><input value="0.112">
+   <label>Speed (m/s), altitude (m)</label><input value="40, 0 (ISA)">
+   <table>
+    <tr><th>Quantity</th><th>Value</th><th>Label</th></tr>
+    <tr><td>Air density</td><td>1.225 kg/m³</td><td><span class="lbl l-th">ISA</span></td></tr>
+    <tr><td>Drag force</td><td>31.3 N</td><td><span class="lbl l-est">From given Cd, no CFD</span></td></tr>
+    <tr><td>Aero power</td><td>1.25 kW</td><td><span class="lbl l-est">From given Cd, no CFD</span></td></tr>
+   </table>
+   <p class="src">Applies to frames and vehicles. Not applicable to a single crush member.</p>
+  </div>
+ </div>
+</section>
+
+<section>
+ <h1>Export</h1>
+ <p class="lead">Files for the shop, the robot and the CAE team.</p>
+ <div class="grid">
+  <div class="card dl"><div><h3>Geometry</h3><p>STEP, STL</p></div><button class="btn">Download</button></div>
+  <div class="card dl"><div><h3>Cut plan</h3><p>CSV, PDF: stock, length, end-cut angles</p></div><button class="btn">Download</button></div>
+  <div class="card dl"><div><h3>Weld plan</h3><p>CSV, PDF: joints, type, process, sequence</p></div><button class="btn">Download</button></div>
+  <div class="card dl"><div><h3>Report</h3><p>Every number with its label and source</p></div><button class="btn">Download</button></div>
+  <div class="card dl"><div><h3>Solver deck</h3><p>OpenCourant input, for CAE users</p></div><button class="btn">Download</button></div>
+ </div>
+ <div class="card" style="margin-top:12px">
+  <h3>Cut plan preview</h3>
+  <table>
+   <tr><th>Item</th><th>Stock</th><th>Length</th><th>End A</th><th>End B</th></tr>
+   <tr><td>T1</td><td>□ 100 × 2.8</td><td>450 mm</td><td>90°</td><td>90°</td></tr>
+  </table>
+  <h3 style="margin-top:14px">Weld plan preview</h3>
+  <table>
+   <tr><th>Joint</th><th>Members</th><th>Type</th><th>Process / parameters</th></tr>
+   <tr><td>W1</td><td>T1 + end plate A</td><td>Fillet, all round</td><td class="src">awaiting cited source (welding)</td></tr>
+   <tr><td>W2</td><td>T1 + end plate B</td><td>Fillet, all round</td><td class="src">awaiting cited source (welding)</td></tr>
+  </table>
+ </div>
+</section>
+
+<div class="foot"><button class="btn" id="back">Back</button><button class="btn pri" id="next">Next</button></div>
+</main>
+<footer>Static mockup. Buttons do not download anything. Example values: Park et al. 2022 (CC BY 4.0), data/crush-theory-check.csv, forge/runs/p1a_us2_baseline_h10, forge/scripts/air.</footer>
+<script>
+(function(){
+ var s=0,secs=document.querySelectorAll('section'),btns=document.querySelectorAll('#nav button');
+ function go(i){s=Math.max(0,Math.min(secs.length-1,i));
+  for(var k=0;k<secs.length;k++){secs[k].classList.toggle('on',k===s);btns[k].classList.toggle('on',k===s);}
+  document.getElementById('back').style.visibility=s?'visible':'hidden';
+  document.getElementById('next').textContent=s===secs.length-1?'Start over':'Next';window.scrollTo(0,0);}
+ for(var k=0;k<btns.length;k++)btns[k].onclick=(function(i){return function(){go(i)}})(k);
+ document.getElementById('back').onclick=function(){go(s-1)};
+ document.getElementById('next').onclick=function(){go(s===secs.length-1?0:s+1)};
+ var picks=document.querySelectorAll('.card.pick');
+ for(var j=0;j<picks.length;j++)picks[j].onclick=function(){for(var m=0;m<picks.length;m++)picks[m].classList.remove('sel');this.classList.add('sel')};
+ go(parseInt((location.hash||"#0").slice(1),10)||0);
+})();
+</script>
+</body>
+</html>

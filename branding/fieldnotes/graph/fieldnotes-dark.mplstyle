@@ -1,0 +1,18 @@
+# Field Notes dark overlay (graphite ground). SPDX-License-Identifier: MIT
+# Apply after fieldnotes.mplstyle. Test data = cyanotype pale 7FA8D6, validated simulation = signal F26B1D,
+# unvalidated / pending = dust B9B09C dashed, extra series = lichen 8DB89A, chalk.
+text.color         : EDE6D3
+axes.labelcolor    : EDE6D3
+axes.facecolor     : 16202A
+figure.facecolor   : 16202A
+savefig.facecolor  : 16202A
+axes.edgecolor     : B9B09C
+grid.color         : 2A3843
+xtick.color        : B9B09C
+ytick.color        : B9B09C
+xtick.labelcolor   : B9B09C
+ytick.labelcolor   : B9B09C
+axes.prop_cycle    : cycler('color', ['7FA8D6', 'F26B1D', 'B9B09C', '8DB89A', 'EDE6D3'])
+patch.edgecolor    : 16202A
+legend.labelcolor  : EDE6D3
+hatch.color        : B9B09C

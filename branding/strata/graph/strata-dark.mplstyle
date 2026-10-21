@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# cargen Strata graph style, dark overrides. Use after strata.mplstyle.
+figure.facecolor: 0F1317
+axes.facecolor: 141A20
+savefig.facecolor: 0F1317
+axes.edgecolor: 8E97A1
+axes.labelcolor: F2EEE6
+axes.titlecolor: F2EEE6
+grid.color: 2C3540
+xtick.color: 8E97A1
+ytick.color: 8E97A1
+xtick.labelcolor: F2EEE6
+ytick.labelcolor: F2EEE6
+text.color: F2EEE6
+axes.prop_cycle: cycler('color', ['86AEDA', 'F2EEE6', '5C86B5', '8E97A1'])

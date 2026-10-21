@@ -1,0 +1,126 @@
+#RADIOSS STARTER
+/BEGIN
+SW
+      2026         0
+                  Mg                  mm                   s
+                  Mg                  mm                   s
+/TITLE
+weldtool spot-weld shear smoke test
+# STARTING POINT ONLY - VERIFY WITH TEST COUPONS before any structural or safety use.
+# metal=mild-steel t=1.0 mm nugget d=4.000 mm (4.0*sqrt(t)) area=12.566 mm2
+# F_shear=2.121 kN  F_normal=1.485 kN
+# UTS 290 MPa from NSRW_LC (42 ksi lower bound, note 1)
+# shear = AWS C1.1-AMD1 minimum shear-tension strength
+# normal = 0.7 x shear (TWI lower-bound CTS/TSS for UTS 290 MPa)
+# density 7850 kg/m3 (repo-wide steel assumption)
+# E, G, failure displacements = Altair example values (ALTAIR_LAW59 / ALTAIR_FAILCONNECT example (Spotweld)): CALIBRATE with 0/90 deg, combined and peel tests
+# Perfectly plastic yield curves (flat): a simplification, not data.
+# Ifail=1 (coupled normal+shear failure) chosen as the conservative option; Altair example uses 0.
+# Element: /BRICK + /PROP/TYPE43, tied to shells with /INTER/TYPE2 (not generated here).
+/UNIT/1
+unit for mat
+                  Mg                  mm                   s
+/MAT/LAW59/1/1
+spotweld_mild-steel_t1.0
+#              RHO_I
+            7.85e-09
+#                  E                   G     Imass     Icomp               Ecomp
+               21000               21000         0         0                   0
+#   NB_fct   Fsmooth                Fcut
+         1         1                   0
+# YFun_IDN  YFun_IDT              SR_ref          Fscale_yld
+         1         2                   0                   0
+/FAIL/CONNECT/1
+#          EPS_MAX_N               EXP_N             ALPHA_N R_fct_IDN     Ifail  Ifail_so      ISYM
+                   1                   0                   0         0         1         1         0
+#          EPS_MAX_T               EXP_T             ALPHA_T R_fct_IDT
+                 1.8                   0                   0         0
+#              EIMAX               ENMAX               ETMAX                  Nn                  Nt
+                   0                   0                   0                   0                   0
+#               Tmax               Nsoft           AREAscale
+                   0                   0                   0
+/FUNCT/1
+normal_yield_MPa_vs_plastic_disp_mm
+#                  X                   Y
+                   0             118.142
+                   1             118.142
+/FUNCT/2
+shear_yield_MPa_vs_plastic_disp_mm
+#                  X                   Y
+                   0             168.774
+                 1.8             168.774
+/MAT/ELAST/2
+sheet steel (elastic, smoke test only)
+            7.85e-09
+              210000                 0.3
+/PROP/SHELL/1
+sheet
+#   Ishell    Ismstr     Ish3n    Idrill    Ipinch                  P_Thick_Fail
+        24         0         0         0         0                           0.0
+                 0.0                 0.0                 0.0                 0.0                 0.0
+         0                             1                   0                   1         1         0
+/PROP/TYPE43/2
+spotweld
+#   Ismstr                                                                            True_thickness
+         0                                                                                         0
+/PART/1
+bottom sheet
+         1         2
+/PART/2
+top sheet
+         1         2
+/PART/3
+spotweld
+         2         1
+/NODE
+         1            0.000000            0.000000            0.000000
+         2            3.544855            0.000000            0.000000
+         3            3.544855            3.544855            0.000000
+         4            0.000000            3.544855            0.000000
+         5            0.000000            0.000000            1.000000
+         6            3.544855            0.000000            1.000000
+         7            3.544855            3.544855            1.000000
+         8            0.000000            3.544855            1.000000
+/SHELL/1
+         1         1         2         3         4
+/SHELL/2
+         2         5         6         7         8
+/BRICK/3
+         3         1         2         3         4         5         6         7         8
+/GRNOD/NODE/1
+bottom
+         1         2         3         4
+/GRNOD/NODE/2
+top
+         5         6         7         8
+/BCS/1
+clamp bottom
+#  Tra rot   skew_ID  grnod_ID
+   111 111         0         1
+/BCS/2
+top: only X free
+#  Tra rot   skew_ID  grnod_ID
+   011 111         0         2
+/FUNCT/9
+unit
+                 0.0                 1.0
+                 1.0                 1.0
+/IMPVEL/1
+pull top in X
+#funct_IDT       Dir   skew_ID sensor_ID  grnod_ID  frame_ID     Icoor
+         9         X         0         0         2         0         0
+#            Scale_x             Scale_y              Tstart               Tstop
+                 1.0              1000.0                 0.0                 0.0
+/TH/BRIC/1
+weld
+#var
+DEF
+#obj
+         3
+/TH/NODE/2
+top node
+#var
+DEF
+#  node_ID   Iskew
+         5         0
+/END

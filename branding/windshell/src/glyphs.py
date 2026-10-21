@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: MIT
+# Copyright (c) 2026 galion-studio
 """Convert text in an OFL font to SVG path data (so SVGs need no font files).
-Fonts: Manrope (OFL-1.1), IBM Plex Mono (OFL-1.1)."""
+Fonts: IBM Plex Sans and IBM Plex Mono (SIL OFL 1.1, github.com/IBM/plex). Manrope stays
+registered only for comparison; the brand does not use it."""
 import io
 import uharfbuzz as hb
 from fontTools.ttLib import TTFont
@@ -12,6 +14,7 @@ from functools import lru_cache
 G = "/usr/share/fonts/truetype/sand-box/google/"
 FONTS = {"manrope": G + "Manrope/Manrope-VariableFont_wght.ttf",
          "plexmono": G + "IBM Plex Mono/IBMPlexMono-Medium.ttf",
+         "plexmono-r": G + "IBM Plex Mono/IBMPlexMono-Regular.ttf",
          "plexsans": G + "IBM Plex Sans/IBMPlexSans-VariableFont_wdth,wght.ttf"}
 
 @lru_cache(None)

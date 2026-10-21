@@ -1,0 +1,55 @@
+# Field Notes graph style for cargen (matplotlib rcParams). SPDX-License-Identifier: MIT
+# Use: plt.style.use("branding/fieldnotes/graph/fieldnotes.mplstyle")
+# Light "plate" default (paper ground). For dark slides apply fieldnotes-dark.mplstyle on top.
+# Colour carries meaning (see CONCEPT.md); draw pending/unvalidated series dotted or dashed:
+#   cyanotype blue 2F5F8F = physical test data   signal ink A8461A = validated simulation
+#   sepia 5E5141 dashed   = unvalidated / pending   fern 3D6B4A, graphite = extra series only
+# Fonts: IBM Plex Sans (text), IBM Plex Mono (numbers, captions); SIL OFL 1.1. Falls back to DejaVu.
+font.family        : sans-serif
+font.sans-serif    : IBM Plex Sans, DejaVu Sans
+font.monospace     : IBM Plex Mono, DejaVu Sans Mono
+font.size          : 10
+text.color         : 16202A
+axes.labelcolor    : 16202A
+axes.titlesize     : 11.5
+axes.titleweight   : 600
+axes.titlelocation : left
+axes.titlepad      : 10
+axes.labelsize     : 10
+axes.labelpad      : 6
+axes.facecolor     : F3EDDF
+figure.facecolor   : F3EDDF
+savefig.facecolor  : F3EDDF
+axes.edgecolor     : 16202A
+axes.linewidth     : 0.9
+axes.spines.top    : False
+axes.spines.right  : False
+axes.grid          : True
+axes.axisbelow     : True
+grid.color         : DCD2BC
+grid.linewidth     : 0.6
+grid.linestyle     : -
+xtick.color        : 16202A
+ytick.color        : 16202A
+xtick.labelcolor   : 5E5141
+ytick.labelcolor   : 5E5141
+xtick.direction    : in
+ytick.direction    : in
+xtick.major.size   : 5
+ytick.major.size   : 5
+xtick.minor.visible: True
+ytick.minor.visible: True
+xtick.minor.size   : 2.5
+ytick.minor.size   : 2.5
+xtick.minor.width  : 0.6
+ytick.minor.width  : 0.6
+axes.prop_cycle    : cycler('color', ['2F5F8F', 'A8461A', '5E5141', '3D6B4A', '16202A'])
+lines.linewidth    : 1.5
+lines.markersize   : 5.5
+patch.edgecolor    : F3EDDF
+legend.frameon     : False
+legend.fontsize    : 8.5
+legend.labelcolor  : 16202A
+hatch.color        : 5E5141
+figure.dpi         : 100
+savefig.dpi        : 160

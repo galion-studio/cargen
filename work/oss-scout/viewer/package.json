@@ -1,0 +1,6 @@
+{
+  "name": "forge-oss-viewer-spike",
+  "private": true,
+  "license": "MIT",
+  "dependencies": { "three": "0.186.1" }
+}

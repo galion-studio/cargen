@@ -1,0 +1,17 @@
+# Wind & Shell dark overlay. SPDX-License-Identifier: MIT
+# Use after windshell.mplstyle:  plt.style.use([".../windshell.mplstyle", ".../windshell-dark.mplstyle"])
+text.color         : F4F1EA
+axes.labelcolor    : F4F1EA
+axes.facecolor     : 1B2733
+figure.facecolor   : 16202A
+savefig.facecolor  : 16202A
+axes.edgecolor     : 9AA3AD
+grid.color         : 2C3A48
+xtick.color        : 9AA3AD
+ytick.color        : 9AA3AD
+xtick.labelcolor   : F4F1EA
+ytick.labelcolor   : F4F1EA
+legend.labelcolor  : F4F1EA
+patch.edgecolor    : 16202A
+# test data: sky, paper, light sky, mist; model: signal orange
+axes.prop_cycle    : cycler('color', ['7FA8D6', 'F4F1EA', 'B5CEEA', '9AA3AD', 'F26B1D'])

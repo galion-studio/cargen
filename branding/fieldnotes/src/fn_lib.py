@@ -19,31 +19,35 @@ os.makedirs(CACHE, exist_ok=True)
 
 # ---------------------------------------------------------------- palette
 P = dict(
-    paper="#F3EDDF",      # warm specimen paper
-    vellum="#E7DDC6",     # deeper paper, plate panels
-    ink="#16202A",        # iron-gall ink, same as the existing logo charcoal
-    sepia="#5E5141",      # margin notes, captions
-    fern="#3D6B4A",       # botanical green (primary green)
-    moss="#25432F",       # deep green, text-safe
-    sage="#A9BC9C",       # pale leaf wash
-    copper="#E2662A",     # accent, continues logo orange #F26B1D, for marks / dark bg
-    copperInk="#A8461A",  # copper for text and hairlines on paper (AA)
-    night="#111A21",      # star-atlas night
-    nightLine="#2A3843",  # graticule on night
-    starlight="#EDE6D3",  # text on night
+    graphite="#16202A",   # existing cargen charcoal: primary dark ground, text on paper
+    rule="#2A3843",       # graticule / grid lines on graphite (non-text)
+    paper="#F3EDDF",      # field-notebook paper: light ground
+    vellum="#E7DDC6",     # deeper paper: plate panels, caption blocks (non-text)
+    chalk="#EDE6D3",      # text and line work on graphite
+    sepia="#5E5141",      # secondary text on paper (captions, provenance)
+    dust="#B9B09C",       # secondary text on graphite
+    signal="#F26B1D",     # existing cargen orange: the car, validated-simulation results
+    signalInk="#A8461A",  # signal orange for text / thin lines on paper (AA)
+    cyan="#2F5F8F",       # cyanotype blue: physical test data on paper
+    cyanPale="#7FA8D6",   # cyanotype blue on graphite
+    fern="#3D6B4A",       # specimen green on paper: the leaf, never data
+    lichen="#8DB89A",     # specimen green on graphite
+    sage="#A9BC9C",       # pale leaf wash (fills only)
 )
+# legacy aliases used by the primitives below
+P.update(ink=P["graphite"], night=P["graphite"], nightLine=P["rule"], starlight=P["chalk"],
+         copper=P["signal"], copperInk=P["signalInk"], moss=P["fern"])
 
 # ---------------------------------------------------------------- fonts (OFL)
 FONTS = {
-    # key: (file, variation axes or None)
-    "garamond":        ("EB Garamond/EBGaramond-VariableFont_wght.ttf", {"wght": 500}),
-    "garamond-semi":   ("EB Garamond/EBGaramond-VariableFont_wght.ttf", {"wght": 600}),
-    "garamond-reg":    ("EB Garamond/EBGaramond-VariableFont_wght.ttf", {"wght": 400}),
-    "garamond-it":     ("EB Garamond/EBGaramond-Italic-VariableFont_wght.ttf", {"wght": 400}),
-    "garamond-it-med": ("EB Garamond/EBGaramond-Italic-VariableFont_wght.ttf", {"wght": 500}),
-    "mono":            ("IBM Plex Mono/IBMPlexMono-Regular.ttf", None),
-    "mono-light":      ("IBM Plex Mono/IBMPlexMono-Light.ttf", None),
-    "mono-med":        ("IBM Plex Mono/IBMPlexMono-Medium.ttf", None),
+    # key: (file, variation axes or None). All SIL Open Font License 1.1 (IBM Plex: github.com/IBM/plex).
+    "serif-semi":  ("IBM Plex Serif/IBMPlexSerif-SemiBold.ttf", None),     # wordmark
+    "serif":       ("IBM Plex Serif/IBMPlexSerif-Regular.ttf", None),
+    "serif-it":    ("IBM Plex Serif/IBMPlexSerif-Italic.ttf", None),       # binomial names in captions
+    "sans":        ("IBM Plex Sans/IBMPlexSans-VariableFont_wdth,wght.ttf", {"wght": 400, "wdth": 100}),
+    "sans-semi":   ("IBM Plex Sans/IBMPlexSans-VariableFont_wdth,wght.ttf", {"wght": 600, "wdth": 100}),
+    "mono":        ("IBM Plex Mono/IBMPlexMono-Regular.ttf", None),
+    "mono-med":    ("IBM Plex Mono/IBMPlexMono-Medium.ttf", None),
 }
 
 @functools.lru_cache(None)
@@ -94,7 +98,7 @@ def svg(w, h, body, title, bg=None, extra_defs=""):
     bgr = f'<rect width="{w}" height="{h}" fill="{bg}"/>' if bg else ""
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="{title}">'
             f'<title>{title}</title>\n<!-- SPDX-License-Identifier: MIT. Copyright (c) 2026 galion-studio. Original artwork, "Field Notes" concept. '
-            f'Lettering: EB Garamond and IBM Plex Mono (SIL Open Font License 1.1), converted to outlines. -->\n'
+            f'Lettering: IBM Plex Serif, Sans and Mono (SIL Open Font License 1.1), converted to outlines. -->\n'
             f'<defs>{extra_defs}</defs>{bgr}{body}</svg>\n')
 
 def write(name, content):

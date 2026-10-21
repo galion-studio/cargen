@@ -1,0 +1,75 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT -->
+<!-- Copyright (c) 3000 galion-studio -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Forge OSS spike: three.js STL viewer</title>
+<style>
+  html,body{margin:0;height:100%;background:#15171a;color:#ddd;font:13px system-ui,sans-serif}
+  #hud{position:absolute;top:8px;left:8px;background:#000a;padding:6px 10px;border-radius:4px;white-space:pre}
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "./node_modules/three/build/three.module.js",
+  "three/addons/": "./node_modules/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="hud">loading...</div>
+<script type="module">
+import * as THREE from 'three';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ?stl=a.stl,b.stl (paths relative to this page). Default: truck-spike output.
+const q = new URLSearchParams(location.search).get('stl');
+const files = (q ? q.split(',') : ['../truck-spike/out/plate.stl', '../truck-spike/out/cylinder.stl']);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.add(new THREE.HemisphereLight(0xffffff, 0x334455, 1.2));
+const sun = new THREE.DirectionalLight(0xffffff, 2); sun.position.set(300, 400, 500); scene.add(sun);
+scene.add(new THREE.GridHelper(400, 40, 0x555555, 0x2a2a2a).rotateX(Math.PI / 2)); // Z-up like CAD
+
+const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 10000);
+camera.up.set(0, 0, 1);
+const controls = new OrbitControls(camera, renderer.domElement);
+
+const hud = document.getElementById('hud');
+const colors = [0x8fa3b8, 0xd08a3c, 0x6fb36f, 0xb36fa8];
+const group = new THREE.Group(); scene.add(group);
+const lines = [];
+const loader = new STLLoader();
+
+const geoms = await Promise.all(files.map(f => loader.loadAsync(f)));
+geoms.forEach((g, i) => {
+  g.computeVertexNormals();
+  const m = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ color: colors[i % colors.length], metalness: 0.3, roughness: 0.5 }));
+  if (i > 0) m.position.x = 260 * i; // lay parts out side by side
+  group.add(m);
+  lines.push(`${files[i].split('/').pop()}: ${g.attributes.position.count / 3} tris`);
+});
+
+const box = new THREE.Box3().setFromObject(group);
+const c = box.getCenter(new THREE.Vector3()), s = box.getSize(new THREE.Vector3()).length();
+controls.target.copy(c);
+camera.position.set(c.x + s * 0.6, c.y - s * 0.9, c.z + s * 0.6);
+controls.update();
+hud.textContent = lines.join('\n') + '\nunits: mm  |  drag = orbit, wheel = zoom';
+document.title += ' [ready]';
+window.__forgeReady = lines;
+
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

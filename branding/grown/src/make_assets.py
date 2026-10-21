@@ -110,9 +110,9 @@ def fruit(Pt, r, kids, col, n, rng_seed, rad=3.0):
 
 BW, BH = 1280, 320
 def banner_net():
-    return grow((520, -10, 1290, 330),
-                [(1290, 300), (1290, 120), (1180, 330), (960, 330), (760, 330), (1290, -5)],
-                n=2600, nodes=16, seed=5, influence=60)
+    return grow((540, 10, 1290, 330),
+                [(1290, 290), (1290, 90), (1150, 330), (930, 330), (720, 330)],
+                n=3400, nodes=22, seed=5, influence=58, spread=8)
 
 def banner(dark, net, slot=False):
     Pt, par, r, k = net

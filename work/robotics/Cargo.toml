@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 3000 galion-studio
+[package]
+name = "weld_arm"
+description = "Forge robotics prototype: 6-axis (UR5e DH) arm as a Rapier multibody, IK along a straight box-tube weld seam with reach and joint-limit checks"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+rust-version = "1.86"
+publish = false
+
+# Standalone crate: not part of the forge workspace.
+[workspace]
+
+[dependencies]
+rapier3d-f64 = "0.36"
+
+[[bin]]
+name = "weld_arm"
+path = "src/main.rs"
+
+# Optimise tests and dependencies so the IK sweeps run quickly.
+[profile.test]
+opt-level = 2
+
+[profile.dev.package."*"]
+opt-level = 2
