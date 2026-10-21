@@ -1,0 +1,154 @@
+# ---------------------------------------------------------------
+# Forge / cargen .gitignore
+# Keep source, docs, small curated data and configs in git.
+# Keep binaries, solver output, caches and big data out.
+# ---------------------------------------------------------------
+
+# ---- Rust ----
+target/
+**/target/
+**/*.rs.bk
+*.pdb
+
+# ---- Python ----
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+.ipynb_checkpoints/
+*.egg-info/
+.eggs/
+dist/
+pip-wheel-metadata/
+
+# ---- C / C++ / Fortran build artifacts ----
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.out.exe
+*.mod
+*.smod
+build/
+builds/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+Makefile.local
+
+# ---- Third-party solvers (downloaded, never vendored) ----
+# OpenCourant is AGPL and run unmodified as a separate program;
+# fetch it with the scripts instead of committing it.
+third_party/
+OpenCourant*/
+OpenCourant_*.zip
+oc-src/
+*.zip
+*.tar.gz
+*.tgz
+
+# ---- OpenCourant / OpenRadioss run output ----
+runs/
+!runs/.gitkeep
+results/
+output/
+sim_out/
+*_[0-9][0-9][0-9][0-9].out
+*_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].rst
+*.rst
+*A[0-9][0-9][0-9]
+*A[0-9][0-9][0-9].gz
+*T[0-9][0-9]
+*.h3d
+*.anim
+*.vtk
+*.vtu
+*.pvtu
+*.d3plot
+d3plot*
+*.thy
+*.sta
+*.frd
+*.dat.out
+*.msg
+*.cvg
+core
+core.*
+
+# ---- Simulation and mesh results ----
+*.h5
+*.hdf5
+*.npz
+*.npy
+*.parquet
+*.pkl
+*.pickle
+*.msh
+*.stl.tmp
+*.vtp
+
+# ---- Large data ----
+data/raw/
+data/large/
+data/cache/
+datasets/
+*.bin
+*.dat.gz
+*.iso
+# Copyrighted papers and anything extracted from them stay local
+research/**/*.pdf
+research/p1a/park2022.txt
+research/p1a/img-*.png
+
+# ---- Logs ----
+*.log
+logs/
+log/
+nohup.out
+
+# ---- Secrets (never commit) ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ---- IDE / editor ----
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.project
+.settings/
+.cproject
+*.sublime-*
+
+# ---- OS ----
+.DS_Store
+.AppleDouble
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
