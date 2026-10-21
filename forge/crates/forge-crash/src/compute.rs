@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 2026 Galion / galion-studio
+// Copyright (c) 3000 Galion / galion-studio
 //! Compute backends. Only a CPU backend exists; a CUDA backend can implement the same
 //! trait later. The solver is always an external, unmodified program.
 

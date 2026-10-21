@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 2026 Galion / galion-studio
+// Copyright (c) 3000 Galion / galion-studio
 //! Crush metrics on a force-displacement curve. The same functions are applied to the
 //! simulated and to the digitized experimental curve, so both are measured the same way.
 

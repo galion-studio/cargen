@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 2026 Galion / galion-studio
+// Copyright (c) 3000 Galion / galion-studio
 //! Typed parameters for the P1a square-tube axial crush case.
 //! Units throughout: tonne (Mg), mm, s  =>  force N, stress MPa, energy mJ.
 

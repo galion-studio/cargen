@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 2026 Galion / galion-studio
+// Copyright (c) 3000 Galion / galion-studio
 //! Metrics, pass/fail against tolerances stated up front, and JSON + Markdown reports.
 
 use crate::compute::RunRecord;

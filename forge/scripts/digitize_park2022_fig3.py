@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2026 Galion / galion-studio
+# Copyright (c) 3000 Galion / galion-studio
 """Digitize Figure 3 of Park, Cho & Kim (2022), Materials 15:2107 (CC BY 4.0),
 doi:10.3390/ma15062107 -- the US-2 indentation vs reaction-force curve
 (P_m = 100.98 kN marked in the figure, matches Table 4 US-2).

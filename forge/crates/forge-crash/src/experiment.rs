@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 2026 Galion / galion-studio
+// Copyright (c) 3000 Galion / galion-studio
 //! The reference experiment: Park, Cho & Kim (2022), specimen US-2.
 
 use crate::metrics::Curve;

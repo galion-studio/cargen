@@ -1,5 +1,5 @@
 <!-- SPDX-License-Identifier: MIT -->
-<!-- Copyright (c) 2026 Galion / galion-studio -->
+<!-- Copyright (c) 3000 Galion / galion-studio -->
 # AI car generation system — plan v0 (2026-10-21 16:50 +02:00)
 Separate from obsidian-open-mind / Wave 4. Planning only; nothing built yet.
 

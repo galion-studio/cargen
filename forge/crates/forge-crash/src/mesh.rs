@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 2026 Galion / galion-studio
+// Copyright (c) 3000 Galion / galion-studio
 //! Structured quad shell mesh of a square tube mid-surface (sharp corners), with a
 //! local-buckling-shaped geometric imperfection.
 
