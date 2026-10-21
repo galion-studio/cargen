@@ -1,0 +1,9 @@
+- 2026-10-21 16:50 +02:00 — Plan v0 written (PLAN.md) on Mate's instruction relayed by New Bot 1. Nothing built, no agents started.
+- 2026-10-21 16:50 +02:00 — v1 additions (licence research, materials, OpenRouter). Started 2 read-only research workers.
+- 2026-10-21 16:52 +02:00 — v2 decisions folded in; asked Mate to confirm repo creation and spend.
+- 2026-10-21 16:54 +02:00 — v3 relayed (auto-merge inside forge); awaiting Mate's confirmation.
+- 2026-10-21 16:58 +02:00 — Licence research done; crash solver switched to OpenCourant.
+- 2026-10-21 17:00 +02:00 — Materials research done.
+- 2026-10-21 17:19 +02:00 — README/research/visuals worker started (crush-experiment research, theory check, graphs, logo, README, git prep). Not touching forge/ solver runs or code.
+- 2026-10-21 17:25 +02:00 — Crush research: 48 published tests (Park 2022, A&J 1984/1986, Aljawi 2002) in data/crush-experiments.csv; theory check + 3 graphs in forge/docs/img/ (P1a graph = pending slot).
+- 2026-10-21 17:30 +02:00 — Logos (assets/logo/), root README + forge/README, root LICENSE (MIT 2026 galion-studio) written; local git repo initialised on main (not pushed).
