@@ -7,3 +7,4 @@
 - 2026-10-21 17:19 +02:00 — README/research/visuals worker started (crush-experiment research, theory check, graphs, logo, README, git prep). Not touching forge/ solver runs or code.
 - 2026-10-21 17:25 +02:00 — Crush research: 48 published tests (Park 2022, A&J 1984/1986, Aljawi 2002) in data/crush-experiments.csv; theory check + 3 graphs in forge/docs/img/ (P1a graph = pending slot).
 - 2026-10-21 17:30 +02:00 — Logos (assets/logo/), root README + forge/README, root LICENSE (MIT 2026 galion-studio) written; local git repo initialised on main (not pushed).
+- 2026-10-21 17:30 +02:00 — README/visuals worker done. P1a still running (no docs/physics/p1a-tube-crush.md or result JSON yet), so p1a-force-energy.png shows experiment + 'simulation pending'. Re-run scripts/crush_plots.py when results exist. /workspace/forge-repo prepared (2 commits, not pushed).
