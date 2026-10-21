@@ -1,5 +1,5 @@
 <!-- SPDX-License-Identifier: MIT -->
-<!-- Copyright (c) 3000 Galion / galion-studio -->
+<!-- Copyright (c) 2026 Galion / galion-studio -->
 # Materials research: sources, licences, published parameter sets (v0)
 
 Research done 2026-10-21 16:47–17:00 +02:00 (Europe/Zagreb). Read-only web research. Nothing was installed, bought or signed up for. Separate from obsidian-open-mind / Wave 4.

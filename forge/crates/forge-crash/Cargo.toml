@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 3000 Galion / galion-studio
+# Copyright (c) 2026 Galion / galion-studio
 [package]
 name = "forge-crash"
 description = "Forge truth-layer crash orchestration: deck generation, external solver launch, time-history parsing, validation metrics"

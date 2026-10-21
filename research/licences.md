@@ -1,5 +1,5 @@
 <!-- SPDX-License-Identifier: MIT -->
-<!-- Copyright (c) 3000 Galion / galion-studio -->
+<!-- Copyright (c) 2026 Galion / galion-studio -->
 # Open-source building blocks: licences and maturity (cargen)
 
 Compiled 2026-10-21 16:55 +02:00 (Europe/Zagreb). Read-only web research; nothing installed, nothing signed up for.

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 3000 Galion / galion-studio
+// Copyright (c) 2026 Galion / galion-studio
 //! Writer for the Radioss block-format input deck read by OpenCourant
 //! (starter file `<name>_0000.rad`, engine file `<name>_0001.rad`).
 //! Units: Mg, mm, s.

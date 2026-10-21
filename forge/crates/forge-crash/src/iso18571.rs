@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 3000 Galion / galion-studio
+// Copyright (c) 2026 Galion / galion-studio
 //! Curve correlation after ISO/TS 18571:2014 (corridor, phase, magnitude, slope;
 //! weights 0.4/0.2/0.2/0.2). Implemented by Forge from the published method description;
 //! it has NOT been checked against the ISO reference implementation, so scores are

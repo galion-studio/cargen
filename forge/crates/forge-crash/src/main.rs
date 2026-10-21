@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 3000 Galion / galion-studio
+// Copyright (c) 2026 Galion / galion-studio
 //! `forge-p1a`: P1a square-tube crush pipeline.
 //!
 //!   forge-p1a deck    --variant baseline --h 5 --out DIR

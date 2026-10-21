@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 3000 Galion / galion-studio
+// Copyright (c) 2026 Galion / galion-studio
 //! Parse the CSV written by OpenCourant's `th_to_csv` for the P1a deck.
 //! Rigid-wall forces are stored by the solver as impulses (N*s); the force is their
 //! time derivative.
