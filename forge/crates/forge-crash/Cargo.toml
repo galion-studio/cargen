@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 3000 Galion / galion-studio
+[package]
+name = "forge-crash"
+description = "Forge truth-layer crash orchestration: deck generation, external solver launch, time-history parsing, validation metrics"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+
+[[bin]]
+name = "forge-p1a"
+path = "src/main.rs"
