@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: MIT (this compilation). Values are facts read from the cited publications; see research/crush-experiments.md for full citations.
+# Units: mm, MPa, m/s, kg, kJ, kN, kg/m^3. Empty cell = not reported / not confirmed. value_method: how the measured numbers were obtained by us.
+# section: square (c = side length as reported) or circular (c = 2R as reported, R = mean radius per A&J 1986 notation).
+# energy_kJ: A&J 1984 = initial kinetic energy K; A&J 1986 = total input energy (K + M g delta_f) as defined in that paper. mean_force_kN: Park 2022 = absorbed energy / max deformation; A&J dynamic = energy_kJ / delta_f; A&J static = average static force.
+id,source_key,specimen,section,c_mm,t_mm,L_mm,material,sigma_y_MPa,sigma_u_MPa,rho_kg_m3,loading,speed_m_s,striker_mass_kg,energy_kJ,crush_distance_mm,peak_force_kN,mean_force_kN,mode_reported,paper_theory_kN,value_method,notes
+PARK-US1,park2022,US-1,square,100,2.2,450,ASTM A500 Grade A carbon steel,286.1,351.9,,quasi-static,5.0e-5,,,,231.3,60.6,,,table (Tables 1 2 4),Original tests by Jung (1997 PhD thesis Pusan Natl Univ); sigma_u = sigma_T column of Table 2
+PARK-US2,park2022,US-2,square,100,2.8,450,ASTM A500 Grade A carbon steel,310.8,363.3,,quasi-static,5.0e-5,,,,337.1,101.0,,,table (Tables 1 2 4),Forge P1a target specimen
+PARK-US3,park2022,US-3,square,100,3.0,450,ASTM A500 Grade A carbon steel,299.3,351.2,,quasi-static,5.0e-5,,,,361.6,106.2,,,table (Tables 1 2 4),
+PARK-US4,park2022,US-4,square,100,4.2,450,ASTM A500 Grade A carbon steel,366.8,450.8,,quasi-static,5.0e-5,,,,626.0,271.6,,,table (Tables 1 2 4),
+PARK-US5,park2022,US-5,square,75,2.1,450,ASTM A500 Grade A carbon steel,328.5,399.4,,quasi-static,5.0e-5,,,,193.1,59.0,,,table (Tables 1 2 4),
+PARK-US6,park2022,US-6,square,75,3.2,450,ASTM A500 Grade A carbon steel,427.6,477.2,,quasi-static,5.0e-5,,,,404.7,148.4,,,table (Tables 1 2 4),
+AJ84-S24,aj1984,24,square,49.30,1.625,244.1,mild steel (49.31 mm tube),264.5,328.5,,quasi-static,1.66e-5,,,,,35.28,S,,table (Tables 3 4),sigma_y = mean 0.2% proof of tensile specimens 3-4; sigma_u = tube average
+AJ84-S34,aj1984,34,square,49.34,1.635,289.1,mild steel (49.31 mm tube),264.5,328.5,,quasi-static,1.66e-5,,,,,36.71,S,,table (Tables 3 4),
+AJ84-S122,aj1984,122,square,37.11,1.145,244.1,mild steel (37.07 mm tube),277.5,330.5,,quasi-static,1.66e-5,,,,,20.75,A,,table (Tables 3 4),asymmetric mode
+AJ84-S131,aj1984,131,square,37.11,1.145,289.0,mild steel (37.07 mm tube),277.5,330.5,,quasi-static,1.66e-5,,,,,17.90,S,,table (Tables 3 4),
+AJ84-S139,aj1984,139,square,37.10,1.155,100.1,mild steel (37.07 mm tube),277.5,330.5,,quasi-static,1.66e-5,,,,,19.75,S,,table (Tables 3 4),
+AJ84-S141,aj1984,141,square,37.06,1.175,100.2,mild steel (37.07 mm tube),277.5,330.5,,quasi-static,1.66e-5,,,,,18.50,S,,table (Tables 3 4),
+AJ84-I1,aj1984,I1,square,37.07,1.152,133.2,mild steel (37.07 mm tube),277.5,330.5,,dynamic,6.350,73.6,1.48,62.24,,23.8,S,,table (Tables 1 4),drop hammer; K/delta_f re-checked
+AJ84-I5,aj1984,I5,square,37.07,1.152,133.0,mild steel (37.07 mm tube),277.5,330.5,,dynamic,8.963,73.6,2.96,107.4,,27.5,S,,table (Tables 1 4),
+AJ84-I9,aj1984,I9,square,37.07,1.152,177.9,mild steel (37.07 mm tube),277.5,330.5,,dynamic,9.806,73.6,3.54,141.56,,25.0,S,,table (Tables 1 4),
+AJ84-I13,aj1984,I13,square,37.07,1.152,222.0,mild steel (37.07 mm tube),277.5,330.5,,dynamic,7.847,73.6,2.27,88.5,,25.6,S,,table (Tables 1 4),
+AJ84-I19,aj1984,I19,square,37.07,1.152,244.4,mild steel (37.07 mm tube),277.5,330.5,,dynamic,6.207,73.6,1.42,47.3,,30.0,S,,table (Tables 1 4),
+AJ84-I24,aj1984,I24,square,37.07,1.152,244.0,mild steel (37.07 mm tube),277.5,330.5,,dynamic,10.291,73.6,3.90,161,,24.2,S,,table (Tables 1 4),
+AJ84-I29,aj1984,I29,square,37.07,1.152,267.1,mild steel (37.07 mm tube),277.5,330.5,,dynamic,10.271,73.6,3.88,151.1,,25.7,S,,table (Tables 1 4),
+AJ84-T1,aj1984,1,square,49.31,1.63,133.3,mild steel (49.31 mm tube),264.5,328.5,,dynamic,6.364,73.6,1.49,31.2,,47.8,S,,table (Tables 2 4),
+AJ84-T7,aj1984,7,square,49.31,1.63,178.1,mild steel (49.31 mm tube),264.5,328.5,,dynamic,6.301,73.6,1.46,23.3,,62.7,S,,table (Tables 2 4),short crush (one lobe region) so mean force is high
+AJ84-T16,aj1984,16,square,49.31,1.63,222.0,mild steel (49.31 mm tube),264.5,328.5,,dynamic,10.369,73.6,3.96,80.7,,49.0,S,,table (Tables 2 4),
+AJ84-T22,aj1984,22,square,49.31,1.63,244.4,mild steel (49.31 mm tube),264.5,328.5,,dynamic,10.097,73.6,3.75,82.1,,45.7,S,,table (Tables 2 4),
+AJ84-T29,aj1984,29,square,49.31,1.63,267.2,mild steel (49.31 mm tube),264.5,328.5,,dynamic,10.262,73.6,3.88,81.9,,47.3,S,,table (Tables 2 4),
+AJ84-T40,aj1984,40,square,49.31,1.63,100.1,mild steel (49.31 mm tube),264.5,328.5,,dynamic,10.381,73.6,3.97,81.9,,48.4,S,,table (Tables 2 4),
+AJ86-A9,aj1986,A9,square,8.76,1.25,23.4,steel tube type A,,502.9,,quasi-static,3.0e-5,,,,,20.85,EX,18.58,table (Tables 3 5a),extensional mode; static crosshead 1.6e-5 to 5.6e-5 m/s (mid value used)
+AJ86-B2,aj1986,B2,square,11.46,1.28,48.0,steel tube type B,414.8,426.8,,quasi-static,3.0e-5,,,,,22.81,EX,18.50,table (Tables 3 5a),extensional mode
+AJ86-C9,aj1986,C9,square,17.09,1.00,48.0,steel tube type C,384.1,414.2,,quasi-static,3.0e-5,,,,,12.97,S,13.93,table (Tables 3 5a),
+AJ86-D3,aj1986,D3,square,18.18,0.91,100.5,steel tube type D,372.5,413.3,,quasi-static,3.0e-5,,,,,11.72,S,12.12,table (Tables 3 5a),
+AJ86-D4,aj1986,D4,square,18.13,0.91,100.2,steel tube type D,372.5,413.3,,quasi-static,3.0e-5,,,,,12.08,S,12.11,table (Tables 3 5a),
+AJ86-E9,aj1986,E9,square,36.45,1.65,177.3,steel tube type E,272.7,315.6,,quasi-static,3.0e-5,,,,,34.40,S,31.47,table (Tables 3 5b),sigma_y sigma_u from specimen E1 cut from tube wall (as used for sigma_0 in Table 3)
+AJ86-E10,aj1986,E10,square,36.45,1.63,221.9,steel tube type E,272.7,315.6,,quasi-static,3.0e-5,,,,,35.55,S,30.84,table (Tables 3 5b),
+AJ86-D2,aj1986,D2,square,18.16,0.92,100.4,steel tube type D,372.5,413.3,,dynamic,4.62,77.25,0.88,66.7,,13.14,S,,table (Tables 1 5a),A&J note type D tubes appear almost strain-rate insensitive
+AJ86-D5,aj1986,D5,square,18.15,0.92,200.3,steel tube type D,372.5,413.3,,dynamic,5.55,77.25,1.26,92.6,,13.60,S,,table (Tables 1 5a),
+AJ86-D6,aj1986,D6,square,18.16,0.91,200.0,steel tube type D,372.5,413.3,,dynamic,6.47,77.25,1.72,130.5,,13.16,S,,table (Tables 1 5a),
+AJ86-E1,aj1986,E1,square,36.64,1.64,178.1,steel tube type E,272.7,315.6,,dynamic,8.14,77.25,2.59,48.3,,53.72,S,,table (Tables 1 5b),
+AJ86-E3,aj1986,E3,square,36.49,1.63,222.1,steel tube type E,272.7,315.6,,dynamic,9.62,135.5,6.46,144.8,,44.61,S,,table (Tables 1 5b),
+AJ86-E4,aj1986,E4,square,36.55,1.62,222.0,steel tube type E,272.7,315.6,,dynamic,4.99,135.5,1.74,35.9,,48.41,S,,table (Tables 1 5b),
+AJ86-E5,aj1986,E5,square,36.45,1.64,268.0,steel tube type E,272.7,315.6,,dynamic,10.09,77.25,4.01,97.8,,40.99,S,,table (Tables 1 5b),
+AJ86-E6,aj1986,E6,square,36.45,1.64,267.7,steel tube type E,272.7,315.6,,dynamic,6.84,135.5,3.26,67.1,,48.60,S,,table (Tables 1 5b),
+AJ86-E7,aj1986,E7,square,36.46,1.63,289.0,steel tube type E,272.7,315.6,,dynamic,10.91,77.25,4.67,97.0,,48.15,S,,table (Tables 1 5b),
+AJ86-E8,aj1986,E8,square,36.42,1.64,288.8,steel tube type E,272.7,315.6,,dynamic,6.84,135.5,3.26,63.7,,51.13,S,,table (Tables 1 5b),
+AJ86-CT1,aj1986,CT1,circular,28.77,1.21,100.1,steel tube type CT,274.4,313.6,,quasi-static,3.0e-5,,,,,25.38,S,21.17,table (Tables 4 6),c = 2R
+AJ86-D1T7,aj1986,D1T7,circular,55.70,1.54,266.5,steel tube type D1T,222.0,336.0,,quasi-static,3.0e-5,,,,,44.50,S,43.17,table (Tables 4 6),
+AJ86-DT3,aj1986,DT3,circular,49.34,1.56,99.8,steel tube type DT,259.6,327.4,,quasi-static,3.0e-5,,,,,41.72,S,40.96,table (Tables 4 6),
+AJ86-DT4,aj1986,DT4,circular,49.40,1.52,100.1,steel tube type DT,259.6,327.4,,quasi-static,3.0e-5,,,,,41.64,S,39.30,table (Tables 4 6),
+AJ86-GT3,aj1986,GT3,circular,75.04,1.16,99.7,steel tube type GT,282.5,345.5,,quasi-static,3.0e-5,,,,,30.05,S,31.97,table (Tables 4 6),
+ALJ02-W30,aljawi2002,W30,square,30.0,1.5,150,mild steel (as received),280,,7830,quasi-static,3.33e-3,,,106.3,,22.164,S,22.333,text (Sec. 3.1.4),sigma_y 280 MPa and rho are the paper's FE inputs; sigma_u not reported; c is mean width; crush distance = crushing length
